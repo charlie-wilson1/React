@@ -25,7 +25,7 @@ coverage
 build/
 dist/
 pixaBayAPIkey.js
-public/bundle.js
+public/build
 
 #AWS key
 *.pem
