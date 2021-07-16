@@ -1,6 +1,6 @@
 const path = require('path');
 const SRC_DIR = path.join(__dirname, 'client', 'src');
-const OUT_DIR = path.resolve(__dirname, 'public');
+const OUT_DIR = path.resolve(__dirname, 'public', 'build');
 
 const rules = [
     {
@@ -21,6 +21,14 @@ const rules = [
             },
         ],
     },
+    {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+            {
+                loader: 'file-loader',
+            },
+        ],
+    }
 ]
 
 module.exports = {
