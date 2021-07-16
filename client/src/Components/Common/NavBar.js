@@ -1,15 +1,19 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link, useHistory, useRouteMatch } from "react-router-dom";
 
 import { StyleSheet, css } from 'aphrodite';
 
 import logo from './Images/LearnAtric.png';
 
+
 export default function NavBar() {
+
+    const history = useHistory();
+
     return (
         <div className={css(styles.MainContainer)}>
             <div className={css(styles.LogoContainer)}>
-                <img src={logo} />
+                <img src={logo} onClick={() => history.push('/')}/>
             </div>
             <div className={css(styles.ButtonContainer)}>
                 <Link to="/login">
@@ -36,7 +40,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#fcad03'
     },
     LogoContainer: {
-        marginLeft: '2em'
+        marginLeft: '2em',
+        ':hover': {
+            cursor: 'pointer'
+        }
     },
     ButtonContainer: {
         marginLeft: 'auto',
