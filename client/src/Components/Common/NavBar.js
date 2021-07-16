@@ -6,16 +6,16 @@ import logo from './Images/LearnAtric.png';
 
 export default function NavBar() {
     return (
-        <div className={css(styles.MainContainer)}>
+        <header className={css(styles.MainContainer)}>
             <img src={logo} />
-            <div className={css(styles.LoginButton)}>
-                <div className={css(styles.ButtonText)}></div>
+            <div className={css(styles.Button)}>
+                <div className={css(styles.ButtonText)}>Login</div>
             </div>
-            <div className={css(styles.SignUpButton)}>
-                <div className={css(styles.ButtonText)}></div>
+            <div className={css(styles.Button)}>
+                <div className={css(styles.ButtonText)}>Sign Up</div>
             </div>
 
-        </div>
+        </header>
     )
 }
 
@@ -24,17 +24,24 @@ const styles = StyleSheet.create({
         display: 'flex',
         height: '60px',
         width: '100%',
-        justifyContent: 'space-evenly'
+        justifyContent: 'space-evenly',
+        backgroundColor: '#fcad03'
     },
-    LoginButton: {
-        border: '1px solid',
-        borderRadius: '1px'
+    LogoContainer: {
+
     },
-    SignUpButton: { 
+    Button: {
+        display: 'flex',
         border: '1px solid',
-        borderRadius: '1px'
+        borderRadius: '4px',
+        alignItems: 'center',
+        height: '30px',
+        ':hover': {
+            cursor: 'pointer',
+            backgroundColor: 'blue'
+        }
     },
     ButtonText: { 
-
+        padding: '7px'
     }
 })
