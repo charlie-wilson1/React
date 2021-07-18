@@ -7,5 +7,4 @@ This is the first Iteration in getting the Learnatric App ready for launch. Its 
 
 2. From inside the root directory run `npm install`
 
-
-
+3. 
