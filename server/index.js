@@ -8,5 +8,5 @@ const PORT = 8080
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
 app.listen(PORT, () => {
-    console.log(`listening on ${PORT}`);
+    console.log(`server started on http://localhost:8080`);
 })
