@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, useHistory, useRouteMatch } from "react-router-dom";
 
 import { StyleSheet, css } from 'aphrodite';
 
 import logo from './Images/LearnAtric.png';
+import { MainContext } from '../../Contexts/MainContext';
 
 
 export default function NavBar() {
 
     const history = useHistory();
+    const { isLoggedIn } = useContext(MainContext);
 
+    let buttonText = !isLoggedIn ? 'Login' : 'Logout'
     return (
         <div className={css(styles.MainContainer)}>
             <div className={css(styles.LogoContainer)}>
@@ -18,7 +21,7 @@ export default function NavBar() {
             <div className={css(styles.ButtonContainer)}>
                 <Link to="/login">
                     <div className={css(styles.Button)}>
-                        <div className={css(styles.ButtonText)}>Login</div>
+                        <div className={css(styles.ButtonText)}>{buttonText}</div>
                     </div>
                 </Link>
                 <Link to="signup">
