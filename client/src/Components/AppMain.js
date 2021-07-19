@@ -1,17 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Switch,
     Route,
-  } from "react-router-dom";
+} from "react-router-dom";
 
 import NavBar from './Common/NavBar';
 import Home from './Home/Home';
 import Login from './Login/Login';
 import SignUp from './SignUp/SignUp';
 
+import {MainContext} from '../Contexts/MainContext';
+
+
 export default function AppMain() {
+    const [isLoggedIn, setIsLoggedIn] = useState(false); 
+
+    useEffect(() => {
+        console.log('isLoggedIn: ', isLoggedIn)
+    }, [isLoggedIn])
+
+
     return (
-        <div>
+        <MainContext.Provider value={{isLoggedIn, setIsLoggedIn}}>
             <NavBar />
             <Switch>
             <Route exact path="/">
@@ -24,6 +34,6 @@ export default function AppMain() {
                     <SignUp/>
                 </Route>
             </Switch>
-        </div>
+        </MainContext.Provider>
     )
 }
