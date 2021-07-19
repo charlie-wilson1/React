@@ -10,7 +10,7 @@ import { MainContext } from '../../Contexts/MainContext';
 export default function NavBar() {
 
     const history = useHistory();
-    const { isLoggedIn } = useContext(MainContext);
+    const { isLoggedIn, setIsLoggedIn } = useContext(MainContext);
 
     let buttonText = !isLoggedIn ? 'Login' : 'Logout'
     return (
@@ -19,16 +19,27 @@ export default function NavBar() {
                 <img src={logo} onClick={() => history.push('/')}/>
             </div>
             <div className={css(styles.ButtonContainer)}>
-                <Link to="/login">
+                {!isLoggedIn ? 
+                <>
+                <Link to="/login" style={{textDecoration: 'none', color: 'black'}}>
                     <div className={css(styles.Button)}>
                         <div className={css(styles.ButtonText)}>{buttonText}</div>
                     </div>
                 </Link>
-                <Link to="signup">
+                <Link to="signup" style={{textDecoration: 'none', color: 'black'}}>
                     <div className={css(styles.Button)}>
                         <div className={css(styles.ButtonText)}>Sign Up</div>
                     </div>
                 </Link>
+                </>
+                :
+                <div className={css(styles.Button)} onClick={() => {
+                    setIsLoggedIn(false);
+                    history.push('/')
+                    }}>
+                    <div className={css(styles.ButtonText)}>{buttonText}</div>
+                </div>
+            }
             </div>
         </div>
     )
