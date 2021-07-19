@@ -1,23 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from "react-router-dom";
+import {Provider} from "react-redux";
 
-import AppMain from './Components/AppMain'
-
-// export default function App(): JSX.Element {
-//     return (
-//         <div>
-//             <h1>Welcome</h1>
-//         </div>
-//     )
-// }
-
+import AppMain from './Components/AppMain';
+import store from './store.js';
 
 const root = document.getElementById('root');
 
 ReactDOM.render(
-    <Router>
-        <AppMain/> 
-    </Router>,
+    <Provider store={store}>
+        <Router>
+            <AppMain/> 
+        </Router>
+    </Provider>,
     root
 );
