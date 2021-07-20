@@ -14,6 +14,7 @@ import {MainContext} from '../Contexts/MainContext';
 
 export default function AppMain() {
     const [isLoggedIn, setIsLoggedIn] = useState(false); 
+    const [isLoginError, setIsLoginError] = useState(false);
 
     useEffect(() => {
         console.log('isLoggedIn: ', isLoggedIn)
@@ -21,7 +22,7 @@ export default function AppMain() {
 
 
     return (
-        <MainContext.Provider value={{isLoggedIn, setIsLoggedIn}}>
+        <MainContext.Provider value={{isLoggedIn, setIsLoggedIn, isLoginError, setIsLoginError}}>
             <NavBar />
             <Switch>
                 <Route exact path="/">

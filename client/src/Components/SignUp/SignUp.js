@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
         padding: '4px',
         border: 'none',
         borderRadius: '5px',
-        backgroundColor: '#fcad03',
+        backgroundColor: '#facf61',
         ':hover': {
             cursor: 'pointer',
             border: '2px solid',
