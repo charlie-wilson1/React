@@ -4,6 +4,8 @@ import axios from 'axios';
 
 import { StyleSheet, css } from 'aphrodite';
 
+import ProgressTracker from './ProgressTracker';
+
 export default function SignUp() {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [confirmEmail, setConfirmEmail] = useState()
@@ -25,6 +27,8 @@ export default function SignUp() {
     };
     console.log(errors);
     return (
+        <>
+        <ProgressTracker />
         <div className={css(styles.MainContainer)}>
             <form onSubmit={handleSubmit(onSubmit)} className={css(styles.FormContainer)}>
                 <input className={css(styles.InputContainer)} type="text" placeholder="First name" {...register("First name", {required: true, maxLength: 80})}/>
@@ -39,6 +43,7 @@ export default function SignUp() {
                 <input className={css(styles.SubmitButton)}  type="submit" value="Create Account"/>
             </form>
         </div>
+        </>
     );
 }
 
@@ -69,7 +74,7 @@ const styles = StyleSheet.create({
         padding: '4px',
         border: 'none',
         borderRadius: '5px',
-        backgroundColor: '#fcad03',
+        backgroundColor: '#facf61',
         ':hover': {
             cursor: 'pointer',
             border: '2px solid',

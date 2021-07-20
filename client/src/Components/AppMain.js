@@ -6,7 +6,7 @@ import {
 
 import NavBar from './Common/NavBar';
 import Home from './Home/Home';
-import Login from './Login/Login';
+// import Login from './Login/Login';
 import SignUp from './SignUp/SignUp';
 
 import {MainContext} from '../Contexts/MainContext';
@@ -14,6 +14,7 @@ import {MainContext} from '../Contexts/MainContext';
 
 export default function AppMain() {
     const [isLoggedIn, setIsLoggedIn] = useState(false); 
+    const [isLoginError, setIsLoginError] = useState(false);
 
     useEffect(() => {
         console.log('isLoggedIn: ', isLoggedIn)
@@ -21,15 +22,15 @@ export default function AppMain() {
 
 
     return (
-        <MainContext.Provider value={{isLoggedIn, setIsLoggedIn}}>
+        <MainContext.Provider value={{isLoggedIn, setIsLoggedIn, isLoginError, setIsLoginError}}>
             <NavBar />
             <Switch>
-            <Route exact path="/">
+                <Route exact path="/">
                     <Home/>
                 </Route>
-                <Route path="/login">
+                {/* <Route path="/login">
                     <Login/>
-                </Route>
+                </Route> */}
                 <Route path="/signup">
                     <SignUp/>
                 </Route>
