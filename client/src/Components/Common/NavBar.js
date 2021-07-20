@@ -4,6 +4,7 @@ import { Link, useHistory, useRouteMatch } from "react-router-dom";
 import { StyleSheet, css } from 'aphrodite';
 
 import logo from './Images/LearnAtric.png';
+import Login from '../Login/Login';
 import { MainContext } from '../../Contexts/MainContext';
 
 
@@ -25,11 +26,14 @@ export default function NavBar() {
             <div className={css(styles.ButtonContainer)}>
                 {!isLoggedIn ? 
                 <>
+                {/* <input placeholder="Username" />
+                <input placeholder="Password"/>
                 <Link to="/login" style={{textDecoration: 'none', color: 'black'}}>
                     <div className={css(styles.Button)}>
                         <div className={css(styles.ButtonText)}>{buttonText}</div>
                     </div>
-                </Link>
+                </Link> */}
+                <Login />
                 <Link to="signup" style={{textDecoration: 'none', color: 'black'}}>
                     <div className={css(styles.Button)}>
                         <div className={css(styles.ButtonText)}>Sign Up</div>
@@ -87,7 +91,7 @@ const styles = StyleSheet.create({
     Button: {
         display: 'flex',
         border: '1px solid',
-        borderRadius: '4px',
+        borderRadius: '5px',
         alignItems: 'center',
         height: '30px',
         margin: '10px',

@@ -6,7 +6,7 @@ import {
 
 import NavBar from './Common/NavBar';
 import Home from './Home/Home';
-import Login from './Login/Login';
+// import Login from './Login/Login';
 import SignUp from './SignUp/SignUp';
 
 import {MainContext} from '../Contexts/MainContext';
@@ -24,12 +24,12 @@ export default function AppMain() {
         <MainContext.Provider value={{isLoggedIn, setIsLoggedIn}}>
             <NavBar />
             <Switch>
-            <Route exact path="/">
+                <Route exact path="/">
                     <Home/>
                 </Route>
-                <Route path="/login">
+                {/* <Route path="/login">
                     <Login/>
-                </Route>
+                </Route> */}
                 <Route path="/signup">
                     <SignUp/>
                 </Route>
