@@ -15,8 +15,12 @@ export default function NavBar() {
     let buttonText = !isLoggedIn ? 'Login' : 'Logout'
     return (
         <div className={css(styles.MainContainer)}>
-            <div className={css(styles.LogoContainer)}>
+            <div className={css(styles.LogoContainer)} >
                 <img src={logo} onClick={() => history.push('/')}/>
+            </div>
+            <div className={css(styles.SloganContainer)}>
+                <div className={css(styles.SloganText)} style={{fontWeight: 'bold', fontSize: '20px'}}>Learnatric</div>
+                <div className={css(styles.SloganText)}>...becasue everyone learns differently</div>
             </div>
             <div className={css(styles.ButtonContainer)}>
                 {!isLoggedIn ? 
@@ -59,6 +63,21 @@ const styles = StyleSheet.create({
             cursor: 'pointer'
         }
     },
+    SloganContainer: {
+        display: 'flex',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        overflow: 'hidden',
+        marginLeft: '1em'
+    },
+    SloganText: {
+        fontFamily: 'Asap, sans-serif',
+        width: 'fit-content',
+        alignSelf: 'center',
+        textOverflow: 'hidden',
+        color: '#1c3380'
+
+    },
     ButtonContainer: {
         marginLeft: 'auto',
         marginRight: '4em',
@@ -81,5 +100,6 @@ const styles = StyleSheet.create({
     },
     ButtonText: { 
         padding: '7px',
+        fontFamily: 'Asap, sans-serif',
     }
 })
