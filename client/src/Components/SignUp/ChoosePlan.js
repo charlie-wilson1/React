@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
         fontSize: '22x',
         fontWeight: 'bold',
         alignSelf: 'center',
+        paddingTop: '8px',
     },
     OptionContainer: {
         display: 'flex',
