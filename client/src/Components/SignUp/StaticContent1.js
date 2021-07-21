@@ -42,6 +42,9 @@ const styles = StyleSheet.create({
         border: '1px solid',
         borderRadius: '5px'
     },
+    ListItem: {
+        
+    },
     ImageContainer: {
 
     }
