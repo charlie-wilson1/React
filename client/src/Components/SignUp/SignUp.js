@@ -37,12 +37,48 @@ export default function SignUp() {
                             <StaticContent1 />
                         </div>
                         <div className={css(styles.ParentInfoFormContainer)}>
-                            <input type="text" placeholder="First name" {...register("First name", {required: true, maxLength: 80})} />
-                            <input type="text" placeholder="Last name" {...register("Last name", {required: true, maxLength: 100})} />
-                            <input type="text" placeholder="Email" {...register("Email", {required: true, pattern: /^\S+@\S+$/i})} />
-                            <input type="email" placeholder="Confirm Email" {...register("Confirm Email", {required: true, pattern: /^\S +@\S +$/i})} />
-                            <input type="text" placeholder="Password" {...register("Password", {required: true, min: 6, maxLength: 15})} />
-                            <input type="text" placeholder="Confirm Password" {...register("Confirm Password", {required: true})} />
+                            <div className={css(styles.SideBySideInput)}>
+                                <input 
+                                    className={css(styles.InputContainer)}
+                                    type="text"
+                                    placeholder="First name" 
+                                    {...register("First name", {required: true, maxLength: 80})} 
+                                />
+                                <input 
+                                    className={css(styles.InputContainer)}
+                                    type="text" 
+                                    placeholder="Last name" 
+                                    {...register("Last name", {required: true, maxLength: 100})} 
+                                />
+                            </div>
+                            <div className={css(styles.SideBySideInput)}>
+                                <input 
+                                    className={css(styles.InputContainer)}
+                                    type="text" 
+                                    placeholder="Email" 
+                                    {...register("Email", {required: true, pattern: /^\S+@\S+$/i})} 
+                                />
+                                <input 
+                                    className={css(styles.InputContainer)}
+                                    type="email" 
+                                    placeholder="Confirm Email" 
+                                    {...register("Confirm Email", {required: true, pattern: /^\S +@\S +$/i})} 
+                                />
+                            </div>
+                            <div className={css(styles.SideBySideInput)}>
+                                <input 
+                                    className={css(styles.InputContainer)}
+                                    type="text" 
+                                    placeholder="Password" 
+                                    {...register("Password", {required: true, min: 6, maxLength: 15})} 
+                                />
+                                <input 
+                                    className={css(styles.InputContainer)}
+                                    type="text" 
+                                    placeholder="Confirm Password" 
+                                    {...register("Confirm Password", {required: true})} 
+                                />
+                            </div>
                             <label htmlFor="How did you hear about Learnatric? Select One">How did you hear about Learnatric? Select One</label>
                             <select {...register("How did you hear about Learnatric? Select One", { required: true })}>
                                 <option value="Google">Google</option>
@@ -89,6 +125,10 @@ const styles = StyleSheet.create({
         gridColumn: 2,
         display: "flex",
         flexDirection: 'column',
+    },
+    SideBySideInput: {
+        display: "flex", 
+        justifyContent: 'space-around'
     },
     InputContainer: {
         fontSize: '18px',
