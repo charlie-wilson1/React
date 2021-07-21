@@ -60,7 +60,7 @@ export default function SignUp() {
                                 />
                                 <input 
                                     className={css(styles.InputContainer)}
-                                    type="email" 
+                                    type="text" 
                                     placeholder="Confirm Email" 
                                     {...register("Confirm Email", {required: true, pattern: /^\S +@\S +$/i})} 
                                 />
@@ -79,16 +79,24 @@ export default function SignUp() {
                                     {...register("Confirm Password", {required: true})} 
                                 />
                             </div>
-                            <label htmlFor="How did you hear about Learnatric? Select One">How did you hear about Learnatric? Select One</label>
-                            <select {...register("How did you hear about Learnatric? Select One", { required: true })}>
-                                <option value="Google">Google</option>
-                                <option value="Facebook">Facebook</option>
-                                <option value="LinkedIn">LinkedIn</option>
-                                <option value="Other">Other</option>
-                            </select>
+                            <div className={css(styles.SelectContainer)}>
+                                <label 
+                                    className={css(styles.LabelText)}
+                                    htmlFor="How did you hear about Learnatric? Select One"
+                                >
+                                    How did you hear about Learnatric? Select One
+                                </label>
+                                <select className={css(styles.SelectDropDown)}{...register("How did you hear about Learnatric? Select One",{ required: true })}>
+                                    <option value="Google">Google</option>
+                                    <option value="Facebook">Facebook</option>
+                                    <option value="LinkedIn">LinkedIn</option>
+                                    <option value="Word of Mouth">Word or Mouth</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                    <select {...register("Choose Plan", { required: true })}>
+                    <select className={css(styles.InputContainer)}{...register("Choose Plan", { required: true })}>
                         <option value="Monthly">Monthly</option>
                         <option value="Yearly -> Save 33%!">Yearly -> Save 33%!</option>
                     </select>
@@ -125,6 +133,9 @@ const styles = StyleSheet.create({
         gridColumn: 2,
         display: "flex",
         flexDirection: 'column',
+        marginTop: 'auto',
+        marginBottom: 'auto'
+        // alignContent: 'center'
     },
     SideBySideInput: {
         display: "flex", 
@@ -133,7 +144,34 @@ const styles = StyleSheet.create({
     InputContainer: {
         fontSize: '18px',
         height: '30px',
+        width: '15em',
         marginTop: '10px'
+    },
+    SelectContainer: {
+        display: "flex", 
+        flexDirection: 'column',
+        justifyContent: 'center',
+        marginTop: '20px'
+    },
+    LabelText: {
+        fontSize: '20px',
+        fontFamily: 'Asap, sans-serif',
+        alignSelf: 'center',
+    },
+    SelectDropDown: {
+        // appearance: 'none',
+        // outline: 0,
+        // background-image: none,
+        background:'#faeaa7',
+        width: '70%',
+        height: '30px',
+        color: 'black',
+        cursor: 'pointer',
+        border:'1px solid black',
+        borderRadius:'6px',
+        fontSize: '20px',
+        fontFamily: 'Asap, sans-serif',
+        alignSelf: 'center',
     },
     SubmitButton: {
         fontSize: '18px',
