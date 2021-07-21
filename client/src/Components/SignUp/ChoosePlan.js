@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 
 
@@ -13,10 +13,27 @@ const menu = [
     }
 ];
 
-const Option = ({lable, discount, key}) => {
+const Option = ({lable, discount, whatsSelected, setWhatsSelected }) => {
+    const [isSelected, setIsSelected] = useState(false);
+    const className = css(whatsSelected === lable ? styles.ItemConatinerSelected : styles.ItemConatiner);
+
+    const handleClick = () => {
+        setWhatsSelected(lable);
+        // if (isSelected) {
+        //     setIsSelected(false);
+        // } else {
+        //     setIsSelected(true);
+        // }
+    }
+
+    useEffect(() => {
+        if (isSelected) {
+            console.log('isSeleced: ', lable)
+        }
+    }, [isSelected])
     return (
         <>
-            <div className={css(styles.ItemConatiner)}>
+            <div className={className} onClick={() => handleClick()}>
                 <div style={{marginBottom: 'auto', marginTop: 'auto', alignSelf: 'center'}}>
                     <div className={css(styles.OptionLabel)}>{lable}</div>
                     {discount && <div className={css(styles.Discount)}>{discount}</div>} 
@@ -27,12 +44,21 @@ const Option = ({lable, discount, key}) => {
 }
 
 export default function ChoosePlan() {
+
+    const [whatsSelected, setWhatsSelected] = useState('');
+
     return (
         <div className={css(styles.MainContainer)}>
             <div className={css(styles.MainText)}>Choose Plan</div>
             <div className={css(styles.OptionContainer)}>
                 {menu.map((item, ind) => {
-                    return <Option lable={item.label} discount={item.discount} key={ind}/>
+                    return <Option 
+                                key={ind} 
+                                lable={item.label} 
+                                discount={item.discount} 
+                                whatsSelected={whatsSelected} 
+                                setWhatsSelected={setWhatsSelected} 
+                            />
                 })}
             </div>
         </div>
@@ -69,6 +95,20 @@ const styles = StyleSheet.create({
         border: '1px solid',
         borderRadius: '5px',
         backgroundColor: '#e3e2de',
+        height: '50px',
+        width: '95px',
+        paddingBottom: 'auto',
+        paddingTop: 'auto',
+        ':hover': {
+            cursor: 'pointer',
+        }
+    },
+    ItemConatinerSelected: {
+        display: 'flex',
+        justifyContent: 'center',
+        border: '1px solid',
+        borderRadius: '5px',
+        backgroundColor: '#a7faa8',
         height: '50px',
         width: '95px',
         paddingBottom: 'auto',
