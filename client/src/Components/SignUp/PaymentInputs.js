@@ -5,7 +5,6 @@ import images from 'react-payment-inputs/images';
 
 import Globe from '../Common/Images/Globe.png'
 import {SignUpContext} from './Container/SignUpContainer';
-import { set } from 'react-hook-form';
 
 export default function PaymentInputs() {
     const { childCount, planSelected } = useContext(SignUpContext);
@@ -26,14 +25,7 @@ export default function PaymentInputs() {
             let yearPrice = 290 * childCount;
             setPrice(yearPrice)
         }
-        let priceInt = childCount * 29;
-        let priceString = priceInt.toString();
-        console.log('priceString: ', priceString);
-        // setPrice(childCount * 29)
-    }, [childCount, planSelected])
-    useEffect(() => {
-        console.log('price: ', price)
-    }, [price])
+    }, [childCount, planSelected]);
 
     const [cardHolderName, setCardHolderName] = useState('');
     const [cardNumber, setCardNumber] = useState();
@@ -75,8 +67,8 @@ export default function PaymentInputs() {
                     <img src={Globe} />
                 </div>
                 <div className={css(styles.DynamicTextAndPriceContainer)}>
-                    <div className={css(styles.DynammicText)}>This Will Be Dynamic Text</div>
-                    <div className={css(styles.DynammicPrice)}>${price}.00</div>
+                    <div className={css(styles.DynammicText)}>{planSelected} Membership for {childCount} {childCount > 1 ? 'Children' : 'Child'}</div>
+                    <div className={css(styles.DynammicPrice)}>${price}.00 +tax</div>
                 </div>
                 <div className={css(styles.StaticTextContainer)}>
                     <h5>Our Guarantee:</h5>
