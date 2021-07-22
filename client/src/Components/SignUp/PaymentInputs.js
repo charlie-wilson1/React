@@ -1,13 +1,27 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import { usePaymentInputs } from 'react-payment-inputs';
 import images from 'react-payment-inputs/images';
 
 import Globe from '../Common/Images/Globe.png'
+import {SignUpContext} from './Container/SignUpContainer';
 
 export default function PaymentInputs() {
+    const { childCount } = useContext(SignUpContext);
+    const [price, setPrice] = useState();
     const { meta, getCardNumberProps, getExpiryDateProps, getCVCProps, getCardImageProps } = usePaymentInputs();
-    console.log('meta: ', meta);
+    // console.log('meta: ', meta);
+
+    useEffect(() => {
+        let priceInt = childCount * 29;
+        let priceString = priceInt.toString();
+        console.log('priceString: ', priceString);
+        setPrice(priceInt)
+        // setPrice(childCount * 29)
+    }, [childCount])
+    useEffect(() => {
+        console.log('price: ', price)
+    }, [price])
 
     const [cardHolderName, setCardHolderName] = useState('');
     const [cardNumber, setCardNumber] = useState();
@@ -50,7 +64,7 @@ export default function PaymentInputs() {
                 </div>
                 <div className={css(styles.DynamicTextAndPriceContainer)}>
                     <div className={css(styles.DynammicText)}>This Will Be Dynamic Text</div>
-                    <div className={css(styles.DynammicPrice)}>This Will Be Dynamic Price</div>
+                    <div className={css(styles.DynammicPrice)}>${price}.00</div>
                 </div>
                 <div className={css(styles.StaticTextContainer)}>
                     <h5>Our Guarantee:</h5>

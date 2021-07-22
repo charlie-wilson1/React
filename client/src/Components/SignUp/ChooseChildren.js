@@ -11,7 +11,7 @@ export default function ChooseChildren() {
 
     const handleClickDown = () => {
         if (childCount > 1) {
-            setChildCount(count - 1);
+            setChildCount(childCount - 1);
         }
     }
     const handleClickUp = () => {
