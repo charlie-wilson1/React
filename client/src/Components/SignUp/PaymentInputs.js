@@ -34,6 +34,6 @@ const styles = StyleSheet.create({
     MainContainer: {
         display: 'flex',
         flexDirection: 'column',
-        width: '50%',
+        width: '100%',
     }
 })

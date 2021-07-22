@@ -66,6 +66,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#e3e2de',
         margin: '3px',
         borderRadius: '5px',
+        ':hover' : {
+            cursor: 'pointer',
+        }
     },
     CountContainer: {
         display: 'flex',

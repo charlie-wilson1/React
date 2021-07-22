@@ -27,14 +27,12 @@ export default function SignUp() {
         } catch (e) {
             console.log(e)
         }
-
-    
     };
     console.log(errors);
     return (
         <>
             <ProgressTracker />
-            <form style={{display: 'grid', gridTemplateRows: '50vh 50vh', gridTemplateColumns:'50% 50%', height: '100%'}} onSubmit={handleSubmit(onSubmit)}>
+            <form style={{display: 'grid', gridTemplateRows: '33vh 33vh 33vh', gridTemplateColumns:'50% 50%', height: '100%'}} onSubmit={handleSubmit(onSubmit)}>
                 <div className={css(styles.StaticInfoAndImageContainer)}>
                     <StaticContent1 />
                 </div>
@@ -92,50 +90,25 @@ export default function SignUp() {
                             <option value="Google">Google</option>
                             <option value="Facebook">Facebook</option>
                             <option value="LinkedIn">LinkedIn</option>
-                            <option value="Word of Mouth">Word or Mouth</option>
+                            <option value="Word of Mouth">Word of Mouth</option>
                             <option value="Other">Other</option>
                         </select>
                     </div>
                 </div>
-                <div className={css(styles.PlanAndChildrenContainer)}>
-                    <ChoosePlan />
-                    <ChooseChildren />
+                <div className={css(styles.BottomHalfContainer)}>
+                    <div className={css(styles.PlanContainer)}>
+                        <ChoosePlan />
+                    </div>
+                    <div className={css(styles.ChooseChildrenContainer)}>
+                        <ChooseChildren />
+                    </div>
+                </div>
+                    <div className={css(styles.HearFromParentsContainer)}>
+                        <HearFromParents />
+                    </div>
                     <div className={css(styles.PaymentFormContainer)}>
-                    <PaymentInputs/>
-                </div>
-                </div>
-                <div className={css(styles.HearFromParentsContainer)}>
-                    <HearFromParents />
-                </div>
-                
-                {/* <div className={css(styles.PaymentInfoContainer)}>
-                    <input 
-                        type="text" 
-                        placeholder="Cardholder Name" 
-                        {...register("Cardholder Name", {required: true})} 
-                    />
-                    <input 
-                        type="number" 
-                        placeholder="Credit Card Number" 
-                        {...register("Credit Card Number", {})} 
-                    />
-                    <input 
-                        type="text" 
-                        placeholder="Expiration Date" 
-                        {...register("Expiration Date", {required: true, pattern: /^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$/i})} 
-                    />
-                    <input 
-                        type="number" 
-                        placeholder="CVV" 
-                        {...register("CVV", {required: true, min: 3, maxLength: 4})} 
-                    />
-                    <input 
-                        type="number" 
-                        placeholder="Billing Zip Code" 
-                        {...register("Billing Zip Code", {required: true})} 
-                    />
-                    <input type="submit" /> */}
-                {/* </div> */}
+                        <PaymentInputs/>
+                    </div>
             </form>
         </>
     );
@@ -154,17 +127,19 @@ const styles = StyleSheet.create({
         display: "flex",
         flexDirection: 'column',
         marginTop: 'auto',
-        marginBottom: 'auto'
+        marginBottom: 'auto',
+        marginRight: 'auto',
+        marginLeft: 'auto'
     },
     SideBySideInput: {
         display: "flex", 
-        justifyContent: 'space-around'
+        justifyContent: 'space-between'
     },
     InputContainer: {
         fontSize: '18px',
         height: '30px',
-        width: '15em',
-        marginTop: '10px'
+        width: '200px',
+        marginTop: '20px'
     },
     SelectContainer: {
         display: "flex", 
@@ -189,12 +164,25 @@ const styles = StyleSheet.create({
         fontFamily: 'Asap, sans-serif',
         alignSelf: 'center',
     },
-    PlanAndChildrenContainer: {
+    BottomHalfContainer: {
         gridRow: 2,
         gridColumn: 1,
         display: 'flex',
         flexDirection: 'column',
-        // justifyContent: 'center',
+    },
+    PlanContainer: {
+        gridRow: 2,
+        gridColumn: 1,
+        // display: 'flex',
+        // flexDirection: 'column',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+    },
+    ChooseChildrenContainer: {
+        gridRow: 2,
+        gridColumn: 1,
+        // display: 'flex',
+        // flexDirection: 'column',
         marginLeft: 'auto',
         marginRight: 'auto',
     },
@@ -203,8 +191,8 @@ const styles = StyleSheet.create({
         gridColumn: 2
     },
     PaymentFormContainer: {
-        gridRow: 2,
-        gridColumn: 1,
+        gridRow: 3,
+        gridColumn: '1 / span 2',
     },
     SubmitButton: {
         fontSize: '18px',

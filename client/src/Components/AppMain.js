@@ -26,7 +26,8 @@ export default function AppMain() {
             <NavBar />
             <Switch>
                 <Route exact path="/">
-                    <Home/>
+                    {/* <Home/> */}
+                    <SignUp/>
                 </Route>
                 {/* <Route path="/login">
                     <Login/>
