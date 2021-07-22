@@ -9,6 +9,7 @@ import StaticContent1 from './StaticContent1';
 import ChoosePlan from './ChoosePlan';
 import ChooseChildren from './ChooseChildren';
 import HearFromParents from './HearFromParents';
+import PaymentInputs from './PaymentInputs';
 
 export default function SignUp() {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -99,10 +100,14 @@ export default function SignUp() {
                 <div className={css(styles.PlanAndChildrenContainer)}>
                     <ChoosePlan />
                     <ChooseChildren />
+                    <div className={css(styles.PaymentFormContainer)}>
+                    <PaymentInputs/>
+                </div>
                 </div>
                 <div className={css(styles.HearFromParentsContainer)}>
                     <HearFromParents />
                 </div>
+                
                 {/* <div className={css(styles.PaymentInfoContainer)}>
                     <input 
                         type="text" 
@@ -193,13 +198,13 @@ const styles = StyleSheet.create({
         marginLeft: 'auto',
         marginRight: 'auto',
     },
-    PaymentInfoContainer: {
-        gridRow: 2,
-        gridColumn: 2,
-    },
     HearFromParentsContainer: {
         gridRow: 2,
         gridColumn: 2
+    },
+    PaymentFormContainer: {
+        gridRow: 2,
+        gridColumn: 1,
     },
     SubmitButton: {
         fontSize: '18px',
