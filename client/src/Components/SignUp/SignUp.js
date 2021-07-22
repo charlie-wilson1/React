@@ -8,6 +8,7 @@ import ProgressTracker from './ProgressTracker';
 import StaticContent1 from './StaticContent1';
 import ChoosePlan from './ChoosePlan';
 import ChooseChildren from './ChooseChildren';
+import HearFromParents from './HearFromParents';
 
 export default function SignUp() {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -98,13 +99,11 @@ export default function SignUp() {
                 <div className={css(styles.PlanAndChildrenContainer)}>
                     <ChoosePlan />
                     <ChooseChildren />
-                    {/* <input 
-                        type="range" 
-                        placeholder="Choose Number of Children" 
-                        {...register("Choose Number of Children", {required: true, min:1})}/
-                        > */}
                 </div>
-                <div className={css(styles.PaymentInfoContainer)}>
+                <div className={css(styles.HearFromParentsContainer)}>
+                    <HearFromParents />
+                </div>
+                {/* <div className={css(styles.PaymentInfoContainer)}>
                     <input 
                         type="text" 
                         placeholder="Cardholder Name" 
@@ -130,8 +129,8 @@ export default function SignUp() {
                         placeholder="Billing Zip Code" 
                         {...register("Billing Zip Code", {required: true})} 
                     />
-                    <input type="submit" />
-                </div>
+                    <input type="submit" /> */}
+                {/* </div> */}
             </form>
         </>
     );
@@ -197,6 +196,10 @@ const styles = StyleSheet.create({
     PaymentInfoContainer: {
         gridRow: 2,
         gridColumn: 2,
+    },
+    HearFromParentsContainer: {
+        gridRow: 2,
+        gridColumn: 2
     },
     SubmitButton: {
         fontSize: '18px',
