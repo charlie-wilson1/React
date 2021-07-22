@@ -8,24 +8,29 @@ import {SignUpContext} from './Container/SignUpContainer';
 import { set } from 'react-hook-form';
 
 export default function PaymentInputs() {
-    const { childCount } = useContext(SignUpContext);
+    const { childCount, planSelected } = useContext(SignUpContext);
     const [price, setPrice] = useState(29);
     const { meta, getCardNumberProps, getExpiryDateProps, getCVCProps, getCardImageProps } = usePaymentInputs();
     // console.log('meta: ', meta);
 
     useEffect(() => {
-        if (childCount > 1) {
-            let minusOneCount = childCount - 1;
-            let addionalKidsPrice = (minusOneCount * 24) + 29
-            setPrice(addionalKidsPrice)
-        } else (
-            setPrice(29)
-        )
+        if (planSelected === 'Monthly') {
+            if (childCount > 1) {
+                let minusOneCount = childCount - 1;
+                let addionalKidsPrice = (minusOneCount * 24) + 29
+                setPrice(addionalKidsPrice)
+            } else {
+                setPrice(29)
+            }
+        } else {
+            let yearPrice = 290 * childCount;
+            setPrice(yearPrice)
+        }
         let priceInt = childCount * 29;
         let priceString = priceInt.toString();
         console.log('priceString: ', priceString);
         // setPrice(childCount * 29)
-    }, [childCount])
+    }, [childCount, planSelected])
     useEffect(() => {
         console.log('price: ', price)
     }, [price])
