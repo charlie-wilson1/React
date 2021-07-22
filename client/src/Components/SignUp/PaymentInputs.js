@@ -1,17 +1,28 @@
 import React, {useState, useContext, useEffect} from 'react';
 import { StyleSheet, css } from 'aphrodite';
-import { usePaymentInputs } from 'react-payment-inputs';
+import { PaymentInputsWrapper, usePaymentInputs } from 'react-payment-inputs';
 import images from 'react-payment-inputs/images';
 
 import Globe from '../Common/Images/Globe.png'
 import {SignUpContext} from './Container/SignUpContainer';
 
 export default function PaymentInputs() {
-    const { childCount, planSelected } = useContext(SignUpContext);
+    const { childCount, planSelected, allPaymentFormValues, setAllPaymentFormValues } = useContext(SignUpContext);
     const [price, setPrice] = useState(29);
-    const { meta, getCardNumberProps, getExpiryDateProps, getCVCProps, getCardImageProps } = usePaymentInputs();
+    const {
+        meta,
+        wrapperProps,
+        getCardImageProps,
+        getCardNumberProps,
+        getExpiryDateProps,
+        getCVCProps,
+        getZIPProps
+      } = usePaymentInputs();
     // console.log('meta: ', meta);
 
+    useEffect(() => {
+        console.log('forVals: ', allPaymentFormValues)
+    }, [allPaymentFormValues])
     useEffect(() => {
         if (planSelected === 'Monthly') {
             if (childCount > 1) {
@@ -27,18 +38,8 @@ export default function PaymentInputs() {
         }
     }, [childCount, planSelected]);
 
-    const [cardHolderName, setCardHolderName] = useState('');
-    const [cardNumber, setCardNumber] = useState();
-    const [expiryDate, setExpiryDate] = useState();
-    const [cvc, setCVC] = useState();
-    const handleChangeCardNumber = (e) => {
-        console.log('setCardNumber: ', e)
-    }
-    const handleChangeExpiryDate = (e) => {
-        console.log('setExpire: ', e)
-    }
-    const handleChangeCVC =(e) => {
-        console.log('setCVC: ', e)
+    const handleChange = (e) => {
+        setAllPaymentFormValues({...allPaymentFormValues, [e.target.name]: [e.target.value]})
     }
     return (
         <div className={css(styles.MainContainer)}> 
@@ -47,18 +48,28 @@ export default function PaymentInputs() {
                     <div className={css(styles.PaymentHeadderText)}>Enter Payment Information</div>
                 </div>
                 <input 
+                    className={css(styles.InputContainer)}
+                    name="holder_name"
                     type="text"
                     placeholder="Card Holder Name"
-                    value={cardHolderName}
-                    onChange={(e) => setCardHolderName(e.target.value)} 
+                    // value={cardHolderName}
+                    onChange={e => handleChange(e)} 
                 />
-                <div className={css(styles.CardImageAndNumberContainer)}>
+                <PaymentInputsWrapper {...wrapperProps}>
                     <svg {...getCardImageProps({ images })} />
-                    <input {...getCardNumberProps({ onChange: handleChangeCardNumber })} value={cardNumber} />
+                    <input name="card_number"{...getCardNumberProps({ onChange: handleChange})} />
+                    <input name="expire" {...getExpiryDateProps({ onChange: handleChange})} />
+                    <input name="cvc" {...getCVCProps({ onChange: handleChange})} />
+                    <input {...getZIPProps({ onChange: handleChange })} />
+
+                </PaymentInputsWrapper>
+                {/* <div className={css(styles.CardImageAndNumberContainer)}>
+                    <svg className={css(styles.SVG)} {...getCardImageProps({ images })} />
+                    <input className={css(styles.InputContainer)} {...getCardNumberProps({ onChange: handleChangeCardNumber })} value={cardNumber} />
                 </div>
                 <input {...getExpiryDateProps({ onChange: handleChangeExpiryDate })} value={expiryDate} />
                 <input {...getCVCProps({ onChange: handleChangeCVC })} value={cvc} />
-                {meta.isTouched && meta.error && <span>Error: {meta.error}</span>}
+                {meta.isTouched && meta.error && <span>Error: {meta.error}</span>} */}
                 <div className={css(styles.TermsText)}>By clicking Join below, you agree to our Terms and Conditoins and Privacy Policy</div>
                 <input type="submit"/>
             </div>
@@ -100,6 +111,12 @@ const styles = StyleSheet.create({
     PaymentHeadderText: {
 
     },
+    InputContainer: {
+        fontSize: '18px',
+        height: '30px',
+        width: '200px',
+        marginTop: '20px'
+    },
     FormFieldContainer: {
         display: 'flex',
         flexDirection: 'column',
@@ -107,8 +124,12 @@ const styles = StyleSheet.create({
     },
     CardImageAndNumberContainer: {
         display: 'flex',
+        height: '30px'
         // flexDirection: 'row',
         // width: '100%'
+    },
+    SVG: {
+        height: 'inherit'
     },
     TermsText: {
 
