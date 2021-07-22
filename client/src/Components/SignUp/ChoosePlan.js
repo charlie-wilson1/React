@@ -14,23 +14,11 @@ const menu = [
 ];
 
 const Option = ({lable, discount, whatsSelected, setWhatsSelected }) => {
-    const [isSelected, setIsSelected] = useState(false);
     const className = css(whatsSelected === lable ? styles.ItemConatinerSelected : styles.ItemConatiner);
 
     const handleClick = () => {
         setWhatsSelected(lable);
-        // if (isSelected) {
-        //     setIsSelected(false);
-        // } else {
-        //     setIsSelected(true);
-        // }
     }
-
-    useEffect(() => {
-        if (isSelected) {
-            console.log('isSeleced: ', lable)
-        }
-    }, [isSelected])
     return (
         <>
             <div className={className} onClick={() => handleClick()}>

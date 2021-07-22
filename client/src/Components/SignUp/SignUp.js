@@ -7,6 +7,7 @@ import { StyleSheet, css } from 'aphrodite';
 import ProgressTracker from './ProgressTracker';
 import StaticContent1 from './StaticContent1';
 import ChoosePlan from './ChoosePlan';
+import ChooseChildren from './ChooseChildren';
 
 export default function SignUp() {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -96,6 +97,7 @@ export default function SignUp() {
                 </div>
                 <div className={css(styles.PlanAndChildrenContainer)}>
                     <ChoosePlan />
+                    <ChooseChildren />
                     {/* <input 
                         type="range" 
                         placeholder="Choose Number of Children" 
@@ -187,7 +189,10 @@ const styles = StyleSheet.create({
         gridRow: 2,
         gridColumn: 1,
         display: 'flex',
-        justifyContent: 'center',
+        flexDirection: 'column',
+        // justifyContent: 'center',
+        marginLeft: 'auto',
+        marginRight: 'auto',
     },
     PaymentInfoContainer: {
         gridRow: 2,
