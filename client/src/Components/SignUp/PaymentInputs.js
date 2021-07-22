@@ -5,18 +5,25 @@ import images from 'react-payment-inputs/images';
 
 import Globe from '../Common/Images/Globe.png'
 import {SignUpContext} from './Container/SignUpContainer';
+import { set } from 'react-hook-form';
 
 export default function PaymentInputs() {
     const { childCount } = useContext(SignUpContext);
-    const [price, setPrice] = useState();
+    const [price, setPrice] = useState(29);
     const { meta, getCardNumberProps, getExpiryDateProps, getCVCProps, getCardImageProps } = usePaymentInputs();
     // console.log('meta: ', meta);
 
     useEffect(() => {
+        if (childCount > 1) {
+            let minusOneCount = childCount - 1;
+            let addionalKidsPrice = (minusOneCount * 24) + 29
+            setPrice(addionalKidsPrice)
+        } else (
+            setPrice(29)
+        )
         let priceInt = childCount * 29;
         let priceString = priceInt.toString();
         console.log('priceString: ', priceString);
-        setPrice(priceInt)
         // setPrice(childCount * 29)
     }, [childCount])
     useEffect(() => {
