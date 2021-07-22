@@ -10,9 +10,11 @@ export default function StaticContent1() {
                 <div>Fit for Your Child's Needs!</div>
             </div>
             <div className={css(styles.ListContainer)}>
-                    <li>Curated Lessons</li>
-                    <li>"We do" Activities</li>
-                    <li>Curated Problems</li>
+                <div className={css(styles.List)}>
+                    <li className={css(styles.ListItem)}>Curated Lessons</li>
+                    <li className={css(styles.ListItem)}>"We do" Activities</li>
+                    <li className={css(styles.ListItem)}>Curated Problems</li>
+                </div>
             </div>
             <div className={css(styles.ImageContainer)}>
                 <img src={silhouette} />
@@ -26,26 +28,39 @@ const styles = StyleSheet.create({
         display: 'flex',
         justifyContent: 'center',
         flexDirection: 'column',
+        marginTop: '20px',
     },
     NeedsContainer: {
         display: 'flex',
         justifyContent: 'center',
-        width: '285px',
+        alignItems: 'center',
+        width: '300px',
         border: '1px solid',
-        borderRadius: '5px'
+        borderRadius: '5px',
+        backgroundColor: '#faeaa7',
+        height: '40px',
+        fontFamily: 'Asap, sans-serif',
+        fontSize: '22px',
+        fontWeight: 'bold',
     },
     ListContainer: {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        width: '285px',
+        width: '300px',
         border: '1px solid',
-        borderRadius: '5px'
+        borderRadius: '5px',
+        backgroundColor: '#faeaa7',
+        // marginLeft: 'auto',
+        // marginRight: 'auto',
     },
     ListItem: {
+        textAlign: 'center',
+        fontFamily: 'Asap, sans-serif',
+        fontSize: '22px',
         
     },
     ImageContainer: {
-
+        marginTop: '20px'
     }
 })
