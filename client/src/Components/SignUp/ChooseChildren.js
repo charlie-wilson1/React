@@ -1,18 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StyleSheet, css } from 'aphrodite';
+
+import { SignUpContext } from './Container/SignUpContainer';
 
 
 export default function ChooseChildren() {
 
-    const [count, setCount] = useState(1);
+    // const [count, setCount] = useState(1);
+    const { childCount, setChildCount } = useContext(SignUpContext);
 
     const handleClickDown = () => {
-        if (count > 1) {
-            setCount(count - 1);
+        if (childCount > 1) {
+            setChildCount(childCount - 1);
         }
     }
     const handleClickUp = () => {
-        setCount(count + 1);
+        setChildCount(childCount + 1);
     }
     return (
         <div className={css(styles.MainContainer)}>
@@ -22,7 +25,7 @@ export default function ChooseChildren() {
                     <div className={css(styles.ContainerText)}>-</div>
                 </div>
                 <div className={css(styles.CountContainer)}>
-                    <div className={css(styles.ContainerText)}>{count}</div>
+                    <div className={css(styles.ContainerText)}>{childCount}</div>
                 </div>
                 <div className={css(styles.ButtonContainer)} onClick={() => handleClickUp()}>
                     <div className={css(styles.ContainerText)}>+</div>
@@ -66,6 +69,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#e3e2de',
         margin: '3px',
         borderRadius: '5px',
+        ':hover' : {
+            cursor: 'pointer',
+        }
     },
     CountContainer: {
         display: 'flex',
