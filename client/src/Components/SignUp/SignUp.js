@@ -12,27 +12,28 @@ import HearFromParents from './HearFromParents';
 import PaymentInputs from './PaymentInputs';
 
 export default function SignUp() {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, getValues, formState: { errors } } = useForm();
     const [childCount, setChildCount] = useState(1)
-    const onSubmit = async (data) =>{ 
+    const onSubmit = (data) =>{ 
+        console.log('data" ', data)
         console.log('onSubmitdata: ',errors);
-        try {
-            let res = await axios({
-                method: 'post',
-                url: '/signUpForm',
-                data: data,
-            })
-            console.log('axiosRes', res)
+        // try {
+        //     let res = await axios({
+        //         method: 'post',
+        //         url: '/signUpForm',
+        //         data: data,
+        //     })
+        //     console.log('axiosRes', res)
             
-        } catch (e) {
-            console.log(e)
-        }
+        // } catch (e) {
+        //     console.log(e)
+        // }
     };
     console.log(errors);
     return (
         <>
             <ProgressTracker />
-            <form style={{display: 'grid', gridTemplateRows: '33vh 33vh 33vh', gridTemplateColumns:'50% 50%', height: '100%'}} onSubmit={handleSubmit(onSubmit)}>
+            <form style={{display: 'grid', gridTemplateRows: '33vh 33vh 33vh', gridTemplateColumns:'50% 50%', height: '100%'}} onSubmit={handleSubmit((data) => onSubmit(data))}>
                 <div className={css(styles.StaticInfoAndImageContainer)}>
                     <StaticContent1 />
                 </div>
@@ -56,28 +57,60 @@ export default function SignUp() {
                             className={css(styles.InputContainer)}
                             type="text" 
                             placeholder="Email" 
-                            {...register("Email", {required: true, pattern: /^\S+@\S+$/i})} 
+                            {...register("Email", {required: "Email is required!", pattern: /^\S+@\S+$/i})} 
                         />
+                        {errors.Email && (
+                            <p style={{ color: "red" }}>{errors.Email.message}</p>
+                        )}
                         <input 
                             className={css(styles.InputContainer)}
                             type="text" 
                             placeholder="Confirm Email" 
-                            {...register("Confirm Email", {required: true, pattern: /^\S +@\S +$/i})} 
+                            {...register("ConfirmEmail", {
+                                required: true, 
+                                pattern: /^\S+@\S+$/i,
+                                validate: {
+                                    matchesPreviousEmail: (value) => {
+                                        const { Email } = getValues();
+                                        return Email === value || "Emails should match!";
+                                    }
+                                }
+                            })} 
                         />
+                        {errors.ConfirmEmail && (
+                            <p style={{ color: "red" }}>
+                                {errors.ConfirmEmail.message}
+                            </p>
+                        )}
                     </div>
                     <div className={css(styles.SideBySideInput)}>
                         <input 
                             className={css(styles.InputContainer)}
                             type="text" 
                             placeholder="Password" 
-                            {...register("Password", {required: true, min: 6, maxLength: 15})} 
-                        />
-                        <input 
+                            {...register("password", { required: "Password is required!" })}
+                            />
+                            {errors.password && (
+                                <p style={{ color: "red" }}>{errors.password.message}</p>
+                            )}
+                        <input
                             className={css(styles.InputContainer)}
-                            type="text" 
-                            placeholder="Confirm Password" 
-                            {...register("Confirm Password", {required: true})} 
+                            placeholder="Confirm Password"
+                            {...register("passwordConfirmation", {
+                                required: "Please confirm password!",
+                                validate: {
+                                    matchesPreviousPassword: (value) => {
+                                        const { password } = getValues();
+                                        return password === value || "Passwords should match!";
+                                    }
+                                }
+                            })}
                         />
+                        {errors.passwordConfirmation && (
+                            <p style={{ color: "red" }}>
+                                {errors.passwordConfirmation.message}
+                            </p>
+                        )}
                     </div>
                     <div className={css(styles.SelectContainer)}>
                         <label 
