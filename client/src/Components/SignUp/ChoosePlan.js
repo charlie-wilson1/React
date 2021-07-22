@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet, css } from 'aphrodite';
+
+import {SignUpContext} from './Container/SignUpContainer';
 
 
 const menu = [
@@ -13,11 +15,11 @@ const menu = [
     }
 ];
 
-const Option = ({lable, discount, whatsSelected, setWhatsSelected }) => {
-    const className = css(whatsSelected === lable ? styles.ItemConatinerSelected : styles.ItemConatiner);
+const Option = ({lable, discount, planSelected, setPlanSelected }) => {
+    const className = css(planSelected === lable ? styles.ItemConatinerSelected : styles.ItemConatiner);
 
     const handleClick = () => {
-        setWhatsSelected(lable);
+        setPlanSelected(lable);
     }
     return (
         <>
@@ -33,7 +35,8 @@ const Option = ({lable, discount, whatsSelected, setWhatsSelected }) => {
 
 export default function ChoosePlan() {
 
-    const [whatsSelected, setWhatsSelected] = useState('');
+    // const [whatsSelected, setWhatsSelected] = useState('');
+    const { planSelected, setPlanSelected } = useContext(SignUpContext);
 
     return (
         <div className={css(styles.MainContainer)}>
@@ -44,8 +47,8 @@ export default function ChoosePlan() {
                                 key={ind} 
                                 lable={item.label} 
                                 discount={item.discount} 
-                                whatsSelected={whatsSelected} 
-                                setWhatsSelected={setWhatsSelected} 
+                                planSelected={planSelected} 
+                                setPlanSelected={setPlanSelected} 
                             />
                 })}
             </div>

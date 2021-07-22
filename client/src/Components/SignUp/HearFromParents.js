@@ -13,7 +13,7 @@ export default function HearFromParents() {
                     <li className={css(styles.Parent)}>John, father of 8, 11 and 12 year olds</li>
                 </div>
                 <div className={css(styles.QuoteContainer)}>
-                    <div className={css(styles.QuoteText)}>"Repetition in educational technology may be useful, but it can be a waste of time if the student is ready to move on and the program forces you to spend a certain ampunt of time on a lesson."</div>
+                    <div className={css(styles.QuoteText)}>"Repetition in educational technology may be useful, but it can be a waste of time if the student is ready to move on and the program forces you to spend a certain amount of time on a lesson."</div>
                     <li className={css(styles.Parent)}>Rudy, father of 11 year old</li>
                 </div>
                 <div className={css(styles.QuoteContainer)}>

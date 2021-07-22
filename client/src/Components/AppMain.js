@@ -7,7 +7,7 @@ import {
 import NavBar from './Common/NavBar';
 import Home from './Home/Home';
 // import Login from './Login/Login';
-import SignUp from './SignUp/SignUp';
+import SignUpContainer from './SignUp/Container/SignUpContainer';
 
 import {MainContext} from '../Contexts/MainContext';
 
@@ -26,13 +26,14 @@ export default function AppMain() {
             <NavBar />
             <Switch>
                 <Route exact path="/">
-                    <Home/>
+                    {/* <Home/> */}
+                        <SignUpContainer/>
                 </Route>
                 {/* <Route path="/login">
                     <Login/>
                 </Route> */}
                 <Route path="/signup">
-                    <SignUp/>
+                    <SignUpContainer/>
                 </Route>
             </Switch>
         </MainContext.Provider>
