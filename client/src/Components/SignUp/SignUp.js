@@ -30,6 +30,10 @@ export default function SignUp() {
         // }
     };
     console.log(errors);
+    const inputClassName = css(
+        errors ? styles.InputContainer : styles.InputError
+
+    )
     return (
         <div className={css(styles.MainContainer)}>
             <ProgressTracker />
@@ -40,34 +44,31 @@ export default function SignUp() {
                 <div className={css(styles.ParentInfoFormContainer)}>
                     <div className={css(styles.SideBySideInput)}>
                         <input 
-                            className={css(styles.InputContainer)}
+                            className={css(errors.Email ? styles.InputError : styles.InputContainer)}
                             type="text"
-                            placeholder="First name" 
-                            {...register("First name", {required: true, maxLength: 80})} 
+                            placeholder={errors.FirstName ? errors.FirstName.message : "First name"} 
+                            {...register("FirstName", {required: 'First name required!', maxLength: 80})} 
                         />
                         <input 
-                            className={css(styles.InputContainer)}
+                            className={css(errors.Email ? styles.InputError : styles.InputContainer)}
                             type="text" 
-                            placeholder="Last name" 
-                            {...register("Last name", {required: true, maxLength: 100})} 
+                            placeholder={errors.LastName ? errors.LastName.message : "Last name"} 
+                            {...register("LastName", {required: 'Last name required!', maxLength: 100})} 
                         />
                     </div>
                     <div className={css(styles.SideBySideInput)}>
                         <input 
-                            className={css(styles.InputContainer)}
+                            className={css(errors.Email ? styles.InputError : styles.InputContainer)}
                             type="text" 
-                            placeholder="Email" 
+                            placeholder={errors.Email ? errors.Email.message : "Email"} 
                             {...register("Email", {required: "Email is required!", pattern: /^\S+@\S+$/i})} 
                         />
-                        {errors.Email && (
-                            <p style={{ color: "red" }}>{errors.Email.message}</p>
-                        )}
                         <input 
-                            className={css(styles.InputContainer)}
+                            className={css(errors.Email ? styles.InputError : styles.InputContainer)}
                             type="text" 
-                            placeholder="Confirm Email" 
+                            placeholder={errors.ConfirmEmail ? errors.ConfirmEmail.message : "Confirm email"} 
                             {...register("ConfirmEmail", {
-                                required: true, 
+                                required: "Please confirm email", 
                                 pattern: /^\S+@\S+$/i,
                                 validate: {
                                     matchesPreviousEmail: (value) => {
@@ -77,25 +78,17 @@ export default function SignUp() {
                                 }
                             })} 
                         />
-                        {errors.ConfirmEmail && (
-                            <p style={{ color: "red" }}>
-                                {errors.ConfirmEmail.message}
-                            </p>
-                        )}
                     </div>
                     <div className={css(styles.SideBySideInput)}>
                         <input 
-                            className={css(styles.InputContainer)}
+                            className={css(errors.Email ? styles.InputError : styles.InputContainer)}
                             type="text" 
-                            placeholder="Password" 
+                            placeholder={errors.password ? errors.password.message : "Password"} 
                             {...register("password", { required: "Password is required!" })}
                             />
-                            {errors.password && (
-                                <p style={{ color: "red" }}>{errors.password.message}</p>
-                            )}
                         <input
-                            className={css(styles.InputContainer)}
-                            placeholder="Confirm Password"
+                            className={css(errors.Email ? styles.InputError : styles.InputContainer)}
+                            placeholder={errors.passwordConfirmation ? errors.passwordConfirmation.message : "Confirm password"}
                             {...register("passwordConfirmation", {
                                 required: "Please confirm password!",
                                 validate: {
@@ -106,11 +99,11 @@ export default function SignUp() {
                                 }
                             })}
                         />
-                        {errors.passwordConfirmation && (
+                        {/* {errors.passwordConfirmation && (
                             <p style={{ color: "red" }}>
                                 {errors.passwordConfirmation.message}
                             </p>
-                        )}
+                        )} */}
                     </div>
                     <div className={css(styles.SelectContainer)}>
                         <label 
@@ -183,13 +176,30 @@ const styles = StyleSheet.create({
         fontSize: '18px',
         height: '35px',
         width: '45%',
-        marginTop: '2em'
+        marginTop: '2em',
+        borderRadius: '10px',
+        boxSizing: 'border-box',
+        boxShadow: '0px 4px 4px rgba(0,0,0,0.25)'
+    },
+    InputError: {
+        fontSize: '18px',
+        '::placeholder': {
+            
+            color: 'red',
+        },
+        height: '35px',
+        width: '45%',
+        marginTop: '2em',
+        borderRadius: '10px',
+        boxSizing: 'border-box',
+        boxShadow: '0px 4px 4px rgba(0,0,0,0.25)'
     },
     SelectContainer: {
         display: "flex", 
         flexDirection: 'column',
         justifyContent: 'center',
-        marginTop: '20px'
+        marginTop: '20px',
+        
     },
     LabelText: {
         fontSize: '20px',
@@ -203,7 +213,9 @@ const styles = StyleSheet.create({
         color: 'black',
         cursor: 'pointer',
         border:'1px solid black',
-        borderRadius:'6px',
+        borderRadius: '10px',
+        boxSizing: 'border-box',
+        boxShadow: '0px 4px 4px rgba(0,0,0,0.25)',
         fontSize: '20px',
         fontFamily: 'Asap, sans-serif',
         alignSelf: 'center',
@@ -249,7 +261,7 @@ const styles = StyleSheet.create({
         height: '29px',
         padding: '4px',
         border: 'none',
-        borderRadius: '5px',
+        borderRadius: '10px',
         backgroundColor: '#facf61',
         ':hover': {
             cursor: 'pointer',

@@ -99,10 +99,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         width: '100%',
         border: '1px solid',
-        borderRadius: '5px',
+        borderRadius: '10px',
         backgroundColor: '#faeaa7',
         fontFamily: 'Asap, sans-serif',
         fontSize: '20px',
+        boxSizing: 'border-box',
+        boxShadow: '0px 4px 4px rgba(0,0,0,0.25)'
     },
     EnterPaymentHeadder: {
         marginRight: 'auto',
@@ -147,10 +149,9 @@ const styles = StyleSheet.create({
         marginTop: '5px',
         width: '498px',
         alignSelf: 'center',
-        // height: '29px',
         padding: '10px',
         border: 'none',
-        borderRadius: '5px',
+        borderRadius: '10px',
         backgroundColor: '#4280e3',
         ':hover': {
             cursor: 'pointer',

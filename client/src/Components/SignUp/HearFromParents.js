@@ -30,19 +30,21 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
         border: '1px solid',
-        borderRadius: '5px',
+        borderRadius: '10px',
         backgroundColor: '#faeaa7',
         fontFamily: 'Asap, sans-serif',
         width: '100%',
-        height: '100%'
+        height: '100%',
+        boxSizing: 'border-box',
+        boxShadow: '0px 4px 4px rgba(0,0,0,0.25)',
         // marginLeft: 'auto',
         // marginRight: 'auto',
     },
     HeadderContainer: {
         display: 'flex',
         borderBottom: '1px solid',
-        borderBottomLeftRadius: '5px',
-        borderBottomRightRadius: '5px',
+        borderBottomLeftRadius: '10px',
+        borderBottomRightRadius: '10px',
         justifyContent: 'center'
     },
     HeadderText: {
