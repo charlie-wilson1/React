@@ -40,13 +40,15 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
         border: '1px solid',
-        borderRadius: '5px',
+        borderRadius: '10px',
         backgroundColor: '#faeaa7',
         width: '300px',
         height: '150px',
         fontFamily: 'Asap, sans-serif',
         fontSize: '20px',
         alignItems: 'space-around',
+        boxSizing: 'border-box',
+        boxShadow: '0px 4px 4px rgba(0,0,0,0.25)',
     },
     MainText: {
         fontSize: '22x',
@@ -69,7 +71,7 @@ const styles = StyleSheet.create({
         height: '40px',
         backgroundColor: '#e3e2de',
         margin: '3px',
-        borderRadius: '5px',
+        borderRadius: '10px',
         ':hover' : {
             cursor: 'pointer',
         }
@@ -82,7 +84,7 @@ const styles = StyleSheet.create({
         height: '40px',
         backgroundColor: '#e3e2de',
         margin: '3px',
-        borderRadius: '5px',
+        borderRadius: '10px',
     },
     ContainerText: {
         marginBottom: 'auto',

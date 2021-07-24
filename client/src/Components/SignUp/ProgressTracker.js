@@ -35,6 +35,5 @@ const styles = StyleSheet.create({
     StepText: {
         fontFamily: 'Asap, sans-serif',
         fontSize: '22px',
-
     }
 })

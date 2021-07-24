@@ -8,8 +8,8 @@ const PORT = 8080
 app.use(express.static(path.join(__dirname, '..', 'public')));
 app.use(express.json());
 
-app.post('/signUpForm', (req, res) => {
-    console.log('req: ', req.body['First name'])
+app.post('/parentSignUp', (req, res) => {
+    console.log('req: ', req.body)
 });
 
 app.post('/login', (req, res) => {
