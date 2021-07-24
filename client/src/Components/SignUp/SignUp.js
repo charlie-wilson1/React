@@ -31,9 +31,9 @@ export default function SignUp() {
     };
     console.log(errors);
     return (
-        <>
+        <div className={css(styles.MainContainer)}>
             <ProgressTracker />
-            <form style={{display: 'grid', gridTemplateRows: '33vh 33vh 33vh', gridTemplateColumns:'50% 50%', height: '100%'}} onSubmit={handleSubmit((data) => onSubmit(data))}>
+            <form style={{display: 'grid', gridTemplateRows: '33vh 33vh 45vh', gridTemplateColumns:'50% 50%', height: '100%'}} onSubmit={handleSubmit((data) => onSubmit(data))}>
                 <div className={css(styles.StaticInfoAndImageContainer)}>
                     <StaticContent1 />
                 </div>
@@ -143,11 +143,20 @@ export default function SignUp() {
                         <PaymentInputs/>
                     </div>
             </form>
-        </>
+        </div>
     );
 }
 
 const styles = StyleSheet.create({
+    MainContainer: {
+        fontSize: '22px',
+        width: '60em',  
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+    },
     StaticInfoAndImageContainer: {
         gridRow: 1,
         gridColumn: 1,
@@ -159,19 +168,20 @@ const styles = StyleSheet.create({
         gridColumn: 2,
         display: "flex",
         flexDirection: 'column',
-        marginTop: 'auto',
-        marginBottom: 'auto',
-        marginRight: 'auto',
-        marginLeft: 'auto'
+        // marginTop: 'auto',
+        // marginBottom: 'auto',
+        // marginRight: 'auto',
+        // marginLeft: 'auto'
     },
     SideBySideInput: {
         display: "flex", 
+        width: '100%',
         justifyContent: 'space-between'
     },
     InputContainer: {
         fontSize: '18px',
         height: '30px',
-        width: '200px',
+        width: '45%',
         marginTop: '20px'
     },
     SelectContainer: {
@@ -218,6 +228,7 @@ const styles = StyleSheet.create({
         // flexDirection: 'column',
         marginLeft: 'auto',
         marginRight: 'auto',
+        marginTop: 'auto',
     },
     HearFromParentsContainer: {
         gridRow: 2,
