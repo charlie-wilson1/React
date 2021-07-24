@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 
@@ -11,12 +11,19 @@ import ChooseChildren from './ChooseChildren';
 import HearFromParents from './HearFromParents';
 import PaymentInputs from './PaymentInputs';
 
+import { SignUpContext } from './Container/SignUpContainer';
+
 export default function SignUp() {
+    const { allParentInfoFormVals, setAllParentInfoFormVals, isFormSubmit, setIsFormSubmit, } = useContext(SignUpContext);
     const { register, handleSubmit, getValues, formState: { errors } } = useForm();
     const onSubmit = (data) =>{ 
         console.log('data" ', data)
         console.log('onSubmitdata: ',errors);
+        setAllParentInfoFormVals({...allParentInfoFormVals, FirstName: data.FirstName, LastName: data.LastName, Email: data.Email, password: data.password, hear_about_us: data.hear_about_us})
     };
+    useEffect(() => {
+        console.log('on change: ', allParentInfoFormVals)
+    }, [allParentInfoFormVals])
     console.log(errors);
     return (
         <div className={css(styles.MainContainer)}>
@@ -28,12 +35,14 @@ export default function SignUp() {
                 <div className={css(styles.ParentInfoFormContainer)}>
                     <div className={css(styles.SideBySideInput)}>
                         <input 
+                            name="FirstName"
                             className={css(errors.FirstName ? styles.InputError : styles.InputContainer)}
                             type="text"
                             placeholder={errors.FirstName ? errors.FirstName.message : "First name"} 
                             {...register("FirstName", {required: 'First name required!', maxLength: 80})} 
                         />
                         <input 
+                            name="LastName"
                             className={css(errors.LastName ? styles.InputError : styles.InputContainer)}
                             type="text" 
                             placeholder={errors.LastName ? errors.LastName.message : "Last name"} 
@@ -42,6 +51,7 @@ export default function SignUp() {
                     </div>
                     <div className={css(styles.SideBySideInput)}>
                         <input 
+                            name="Email"
                             className={css(errors.Email ? styles.InputError : styles.InputContainer)}
                             type="text" 
                             placeholder={errors.Email ? errors.Email.message : "Email"} 
@@ -65,13 +75,15 @@ export default function SignUp() {
                     </div>
                     <div className={css(styles.SideBySideInput)}>
                         <input 
+                            name="password"
                             className={css(errors.password ? styles.InputError : styles.InputContainer)}
-                            type="text" 
+                            type="password" 
                             placeholder={errors.password ? errors.password.message : "Password"} 
                             {...register("password", { required: "Password is required!" })}
                             />
                         <input
                             className={css(errors.passwordConfirmation ? styles.InputError : styles.InputContainer)}
+                            type="password"
                             placeholder={errors.passwordConfirmation ? errors.passwordConfirmation.message : "Confirm password"}
                             {...register("passwordConfirmation", {
                                 required: "Please confirm password!",
@@ -83,20 +95,15 @@ export default function SignUp() {
                                 }
                             })}
                         />
-                        {/* {errors.passwordConfirmation && (
-                            <p style={{ color: "red" }}>
-                                {errors.passwordConfirmation.message}
-                            </p>
-                        )} */}
                     </div>
                     <div className={css(styles.SelectContainer)}>
                         <label 
                             className={css(styles.LabelText)}
-                            htmlFor="How did you hear about Learnatric? Select One"
+                            htmlFor="hear_about_us"
                         >
                             How did you hear about Learnatric? Select One
                         </label>
-                        <select className={css(styles.SelectDropDown)}{...register("How did you hear about Learnatric? Select One",{required: true })}>
+                        <select className={css(styles.SelectDropDown)}{...register("hear_about_us",{required: true })}>
                             <option value="Google">Google</option>
                             <option value="Facebook">Facebook</option>
                             <option value="LinkedIn">LinkedIn</option>

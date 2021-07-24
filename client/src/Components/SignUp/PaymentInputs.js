@@ -38,6 +38,7 @@ export default function PaymentInputs() {
     }, [childCount, planSelected]);
 
     const handleChange = (e) => {
+        
         setAllPaymentFormValues({...allPaymentFormValues, [e.target.name]: [e.target.value]})
     }
     return (
