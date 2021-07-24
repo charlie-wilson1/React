@@ -23,7 +23,9 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: '#e3e2de',
         borderRadius: '20px',
-        marginTop: '5px'
+        marginTop: '5px',
+        marginRight: 'auto',
+        marginLeft: 'auto'
     },
     StepContainer: {
         display: 'flex',

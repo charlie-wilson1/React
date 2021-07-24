@@ -33,9 +33,10 @@ const styles = StyleSheet.create({
         borderRadius: '5px',
         backgroundColor: '#faeaa7',
         fontFamily: 'Asap, sans-serif',
-        width: '80%',
-        marginLeft: 'auto',
-        marginRight: 'auto',
+        width: '100%',
+        height: '100%'
+        // marginLeft: 'auto',
+        // marginRight: 'auto',
     },
     HeadderContainer: {
         display: 'flex',
@@ -59,6 +60,7 @@ const styles = StyleSheet.create({
         marginRight: 'auto',
         marginTop: '10px',
         marginBottom: '10px',
+        fontSize:'20px',
     },
     QuoteText: {
         fontWeight: 'bold',

@@ -6,7 +6,6 @@ import { SignUpContext } from './Container/SignUpContainer';
 
 export default function ChooseChildren() {
 
-    // const [count, setCount] = useState(1);
     const { childCount, setChildCount } = useContext(SignUpContext);
 
     const handleClickDown = () => {
@@ -59,6 +58,8 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         alignSelf: 'center',
+        marginTop: 'auto', 
+        marginBottom: 'auto',
     },
     ButtonContainer: {
         display: 'flex',
@@ -89,5 +90,7 @@ const styles = StyleSheet.create({
     },
     SubText: {
         alignSelf: 'center',
+        marginTop: 'auto',
+        marginBottom: '3px'
     }
 })
