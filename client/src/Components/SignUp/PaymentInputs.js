@@ -1,14 +1,14 @@
 import React, {useState, useContext, useEffect} from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import { PaymentInputsWrapper, usePaymentInputs } from 'react-payment-inputs';
+import { useForm } from 'react-hook-form';
 import images from 'react-payment-inputs/images';
 
 import Globe from '../Common/Images/Globe.png'
 import {SignUpContext} from './Container/SignUpContainer';
 
-export default function PaymentInputs() {
-    const { childCount, planSelected, allPaymentFormValues, setAllPaymentFormValues } = useContext(SignUpContext);
-    const [price, setPrice] = useState(29);
+export default function PaymentInputs({CardHolderName}) {
+    const { childCount, planSelected, allPaymentFormValues, setAllPaymentFormValues, price, setPrice } = useContext(SignUpContext);
     const {
         meta,
         wrapperProps,
@@ -17,11 +17,10 @@ export default function PaymentInputs() {
         getExpiryDateProps,
         getCVCProps,
         getZIPProps
-      } = usePaymentInputs();
-    // console.log('meta: ', meta);
-
+    } = usePaymentInputs();
+    const { register, handleSubmit, getValues, formState: { errors } } = useForm();
     useEffect(() => {
-        console.log('forVals: ', allPaymentFormValues)
+        console.log('forValsPaymentNoError?: ', allPaymentFormValues)
     }, [allPaymentFormValues])
     useEffect(() => {
         if (planSelected === 'Monthly') {
@@ -39,7 +38,7 @@ export default function PaymentInputs() {
     }, [childCount, planSelected]);
 
     const handleChange = (e) => {
-        setAllPaymentFormValues({...allPaymentFormValues, [e.target.name]: [e.target.value]})
+        setAllPaymentFormValues({...allPaymentFormValues, [e.target.name]: e.target.value, isError: wrapperProps.error ? true : false})
     }
     return (
         <div className={css(styles.MainContainer)}> 
@@ -47,43 +46,38 @@ export default function PaymentInputs() {
                 <div className={css(styles.EnterPaymentHeadder)}>
                     <div className={css(styles.PaymentHeadderText)}>Enter Payment Information</div>
                 </div>
-                <input 
-                    className={css(styles.InputContainer)}
-                    name="holder_name"
-                    type="text"
-                    placeholder="Card Holder Name"
-                    // value={cardHolderName}
-                    onChange={e => handleChange(e)} 
-                />
-                <PaymentInputsWrapper {...wrapperProps}>
-                    <svg {...getCardImageProps({ images })} />
-                    <input name="card_number"{...getCardNumberProps({ onChange: handleChange})} />
-                    <input name="expire" {...getExpiryDateProps({ onChange: handleChange})} />
-                    <input name="cvc" {...getCVCProps({ onChange: handleChange})} />
-                    <input {...getZIPProps({ onChange: handleChange })} />
-
-                </PaymentInputsWrapper>
-                {/* <div className={css(styles.CardImageAndNumberContainer)}>
-                    <svg className={css(styles.SVG)} {...getCardImageProps({ images })} />
-                    <input className={css(styles.InputContainer)} {...getCardNumberProps({ onChange: handleChangeCardNumber })} value={cardNumber} />
+                <div style={{display: 'flex', flexDirection: 'row', width: '95%', justifyContent: 'center', }}>
+                    <div className={css(styles.DynamicTextAndPriceContainer)}>
+                        <div className={css(styles.DynammicText)}>{planSelected} Membership for:</div>
+                        <div style={{marginLeft:'4em', marginTop:'.5em'}}> {childCount}    {childCount > 1 ? 'Children' : 'Child'}</div>
+                        <div className={css(styles.DynammicPrice)}>${price}.00 <p style={{fontSize: '18px'}}>  + tax</p></div>
+                    </div>
                 </div>
-                <input {...getExpiryDateProps({ onChange: handleChangeExpiryDate })} value={expiryDate} />
-                <input {...getCVCProps({ onChange: handleChangeCVC })} value={cvc} />
-                {meta.isTouched && meta.error && <span>Error: {meta.error}</span>} */}
-                <div className={css(styles.TermsText)}>By clicking Join below, you agree to our Terms and Conditoins and Privacy Policy</div>
-                <input type="submit"/>
+                <div >
+                    <CardHolderName />
+                    <div style={{display: 'flex', justifyContent: 'center', marginTop: '.5em'}}>
+                        <PaymentInputsWrapper {...wrapperProps}>
+                            <svg {...getCardImageProps({ images })} />
+                            <input name="card_number"{...getCardNumberProps({ onChange: handleChange})} />
+                            <input name="expire" {...getExpiryDateProps({ onChange: handleChange})} />
+                            <input name="cvc" {...getCVCProps({ onChange: handleChange})} />
+                            <input {...getZIPProps({ onChange: handleChange })} />
+                        </PaymentInputsWrapper>
+                    </div>
+                    <div style={{display: 'flex', flexDirection: 'column',justifyContent: 'center', }}>
+                        <input className={css(styles.SubmitButton)} type="submit" value="Join"/>
+                        <div className={css(styles.TermsText)}>By clicking Join, you agree to our Terms and Conditoins and Privacy Policy</div>
+                    </div>
+                </div>
             </div>
-            <div className={css(styles.ImagePriceContainer)}>
+            <div className={css(styles.StaticContainer)}>
                 <div className={css(styles.ImageContainer)}>
                     <img src={Globe} />
                 </div>
-                <div className={css(styles.DynamicTextAndPriceContainer)}>
-                    <div className={css(styles.DynammicText)}>{planSelected} Membership for {childCount} {childCount > 1 ? 'Children' : 'Child'}</div>
-                    <div className={css(styles.DynammicPrice)}>${price}.00 +tax</div>
-                </div>
+                
                 <div className={css(styles.StaticTextContainer)}>
-                    <h5>Our Guarantee:</h5>
-                    <p>If you're not satisfied within 30 days, we'll gladly provide a refund.</p>
+                    <div style={{marginLeft:'3px', fontWeight:'bold'}}>Our Guarantee:</div>
+                    <div style={{marginLeft:'3px', fontSize: '15px'}}>If you're not satisfied within 30 days, we'll gladly provide a refund.</div>
                 </div>
             </div>
         </div>
@@ -94,62 +88,95 @@ const styles = StyleSheet.create({
     MainContainer: {
         display: 'flex',
         flexDirection: 'row',
-        width: '80%',
-        // marginLeft: '4em',
-        // marginRight: '4em',
+        width: '100%',
         border: '1px solid',
-        borderRadius: '5px',
+        borderRadius: '10px',
         backgroundColor: '#faeaa7',
-        marginLeft: 'auto',
-        marginRight: 'auto',
         fontFamily: 'Asap, sans-serif',
         fontSize: '20px',
+        boxSizing: 'border-box',
+        boxShadow: '0px 4px 4px rgba(0,0,0,0.25)'
     },
     EnterPaymentHeadder: {
-
+        marginRight: 'auto',
+        marginLeft: 'auto',
     },
     PaymentHeadderText: {
-
+        fontSize: '30px',
+        fontWeight: 'bold',
+    },
+    DynamicTextAndPriceContainer: {
+        marginTop: '.5em'
+    },
+    DynammicText: {
+        fontWeight: 'bold'
+    },
+    DynammicPrice: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        fontSize: '26px',
+        fontWeight: 'bold',
+        marginLeft: '2em'
     },
     InputContainer: {
+        display: 'flex',
+        marginLeft: 'auto',
+        marginRight: 'auto',
         fontSize: '18px',
-        height: '30px',
-        width: '200px',
-        marginTop: '20px'
+        height: '35px',
+        width: '50%',
+        marginTop: '.5em'
+    },
+    InputError: {
+        display: 'flex',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        fontSize: '18px',
+        height: '35px',
+        width: '50%',
+        marginTop: '.5em',
+        '::placeholder': {
+            color: 'red'
+        }
     },
     FormFieldContainer: {
         display: 'flex',
         flexDirection: 'column',
         width: '60%'
     },
-    CardImageAndNumberContainer: {
-        display: 'flex',
-        height: '30px'
-        // flexDirection: 'row',
-        // width: '100%'
-    },
-    SVG: {
-        height: 'inherit'
+    SubmitButton: {
+        fontSize: '22px',
+        fontWeight: 'bold',
+        color: 'white',
+        marginTop: '5px',
+        width: '498px',
+        alignSelf: 'center',
+        padding: '10px',
+        border: 'none',
+        borderRadius: '10px',
+        backgroundColor: '#4280e3',
+        ':hover': {
+            cursor: 'pointer',
+            outline: '3px solid',
+            
+        },
     },
     TermsText: {
-
+        marginTop: '.5em',
+        fontSize: '18px',
+        alignSelf: 'center',
     },
-    ImagePriceContainer: {
-
+    StaticContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        borderLeft: '1px solid'
     },
     ImageContainer: {
-
-    },
-    DynamicTextAndPriceContainer: {
-
-    },
-    DynammicText: {
-
-    },
-    DynammicPrice: {
-
+        display: 'flex',
+        justifyContent: 'center'
     },
     StaticTextContainer: {
-
+        marginTop: 'auto'
     },
 })
