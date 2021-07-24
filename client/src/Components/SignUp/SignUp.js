@@ -161,7 +161,8 @@ const styles = StyleSheet.create({
         gridRow: 1,
         gridColumn: 1,
         display: "flex",
-        justifyContent: 'center'
+        // justifyContent: 'center'
+        marginLeft: '5em'
     },
     ParentInfoFormContainer: {
         gridRow: 1,
@@ -180,9 +181,9 @@ const styles = StyleSheet.create({
     },
     InputContainer: {
         fontSize: '18px',
-        height: '30px',
+        height: '35px',
         width: '45%',
-        marginTop: '20px'
+        marginTop: '2em'
     },
     SelectContainer: {
         display: "flex", 
@@ -218,16 +219,16 @@ const styles = StyleSheet.create({
         gridColumn: 1,
         // display: 'flex',
         // flexDirection: 'column',
-        marginLeft: 'auto',
-        marginRight: 'auto',
+        marginLeft: '5em',
+        // marginRight: 'auto',
     },
     ChooseChildrenContainer: {
         gridRow: 2,
         gridColumn: 1,
         // display: 'flex',
         // flexDirection: 'column',
-        marginLeft: 'auto',
-        marginRight: 'auto',
+        marginLeft: '5em',
+        // marginRight: 'auto',
         marginTop: 'auto',
     },
     HearFromParentsContainer: {
@@ -237,6 +238,10 @@ const styles = StyleSheet.create({
     PaymentFormContainer: {
         gridRow: 3,
         gridColumn: '1 / span 2',
+        width: '90%',
+        marginTop: '2em',
+        marginLeft: '5.2em',
+        marginRight: 'auto',
     },
     SubmitButton: {
         fontSize: '18px',
