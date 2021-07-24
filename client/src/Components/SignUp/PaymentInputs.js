@@ -1,14 +1,14 @@
 import React, {useState, useContext, useEffect} from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import { PaymentInputsWrapper, usePaymentInputs } from 'react-payment-inputs';
+import { useForm } from 'react-hook-form';
 import images from 'react-payment-inputs/images';
 
 import Globe from '../Common/Images/Globe.png'
 import {SignUpContext} from './Container/SignUpContainer';
 
-export default function PaymentInputs() {
+export default function PaymentInputs({CardHolderName}) {
     const { childCount, planSelected, allPaymentFormValues, setAllPaymentFormValues, price, setPrice } = useContext(SignUpContext);
-    // const [price, setPrice] = useState(29);
     const {
         meta,
         wrapperProps,
@@ -18,7 +18,7 @@ export default function PaymentInputs() {
         getCVCProps,
         getZIPProps
     } = usePaymentInputs();
-
+    const { register, handleSubmit, getValues, formState: { errors } } = useForm();
     useEffect(() => {
         console.log('forVals: ', wrapperProps)
     }, [allPaymentFormValues])
@@ -55,14 +55,21 @@ export default function PaymentInputs() {
                     </div>
                 </div>
                 <div >
-                    <input 
-                        className={css(styles.InputContainer)}
+                {/* <input 
+                            name="FirstName"
+                            className={css(errors.FirstName ? styles.InputError : styles.InputContainer)}
+                            type="text"
+                            placeholder={errors.FirstName ? errors.FirstName.message : "First name"} 
+                            {...register("FirstName", {required: 'First name required!', maxLength: 80})} 
+                        /> */}
+                    {/* <input 
+                        className={css(errors.holder_name ? styles.InputError : styles.InputContainer)}
                         name="holder_name"
                         type="text"
-                        placeholder="Card Holder Name"
-                        // value={cardHolderName}
-                        onChange={e => handleChange(e)} 
-                    />
+                        placeholder={errors.holder_name ? errors.holder_name.message : "Card Holder Name"}
+                        {...register("holder_name", {required: 'Name required!'})}
+                    /> */}
+                    <CardHolderName />
                     <div style={{display: 'flex', justifyContent: 'center', marginTop: '.5em'}}>
                         <PaymentInputsWrapper {...wrapperProps}>
                             <svg {...getCardImageProps({ images })} />
@@ -136,6 +143,18 @@ const styles = StyleSheet.create({
         height: '35px',
         width: '50%',
         marginTop: '.5em'
+    },
+    InputError: {
+        display: 'flex',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        fontSize: '18px',
+        height: '35px',
+        width: '50%',
+        marginTop: '.5em',
+        '::placeholder': {
+            color: 'red'
+        }
     },
     FormFieldContainer: {
         display: 'flex',

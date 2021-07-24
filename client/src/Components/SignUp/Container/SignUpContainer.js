@@ -23,7 +23,8 @@ export default function SignUpContainer() {
         LastName: '',
         Email: '',
         password: '',
-        hear_about_us: ''
+        hear_about_us: '',
+        holder_name: ''
     })
 
     return (

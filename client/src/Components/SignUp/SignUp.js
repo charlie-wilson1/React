@@ -13,18 +13,31 @@ import PaymentInputs from './PaymentInputs';
 
 import { SignUpContext } from './Container/SignUpContainer';
 
+
+
+
 export default function SignUp() {
     const { allParentInfoFormVals, setAllParentInfoFormVals, isFormSubmit, setIsFormSubmit, } = useContext(SignUpContext);
     const { register, handleSubmit, getValues, formState: { errors } } = useForm();
     const onSubmit = (data) =>{ 
         console.log('data" ', data)
-        console.log('onSubmitdata: ',errors);
-        setAllParentInfoFormVals({...allParentInfoFormVals, FirstName: data.FirstName, LastName: data.LastName, Email: data.Email, password: data.password, hear_about_us: data.hear_about_us})
+        console.log('onSubmitdataerrorSIGNUP: ',errors);
+        setAllParentInfoFormVals({...allParentInfoFormVals, FirstName: data.FirstName, LastName: data.LastName, Email: data.Email, password: data.password, hear_about_us: data.hear_about_us, holder_name: data.holder_name,})
     };
     useEffect(() => {
-        console.log('on change: ', allParentInfoFormVals)
+        console.log('on change no errors: ', allParentInfoFormVals)
     }, [allParentInfoFormVals])
-    console.log(errors);
+    const CardHolderName = () => {
+        return (
+            <input 
+                className={css(errors.holder_name ? styles.InputError : styles.InputContainer)}
+                name="holder_name"
+                type="text"
+                placeholder={errors.holder_name ? errors.holder_name.message : "Card Holder Name"}
+                {...register("holder_name", {required: 'Name required!'})}
+            />
+        )
+    }
     return (
         <div className={css(styles.MainContainer)}>
             <ProgressTracker />
@@ -124,7 +137,7 @@ export default function SignUp() {
                         <HearFromParents />
                     </div>
                     <div className={css(styles.PaymentFormContainer)}>
-                        <PaymentInputs/>
+                        <PaymentInputs CardHolderName={CardHolderName}/>
                     </div>
             </form>
         </div>
@@ -234,6 +247,27 @@ const styles = StyleSheet.create({
         marginTop: '2em',
         marginLeft: '5.2em',
         marginRight: 'auto',
+    },
+    InputContainer: {
+        display: 'flex',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        fontSize: '18px',
+        height: '35px',
+        width: '50%',
+        marginTop: '.5em'
+    },
+    InputError: {
+        display: 'flex',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        fontSize: '18px',
+        height: '35px',
+        width: '50%',
+        marginTop: '.5em',
+        '::placeholder': {
+            color: 'red'
+        }
     },
     SubmitButton: {
         fontSize: '18px',
