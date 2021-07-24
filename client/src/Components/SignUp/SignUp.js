@@ -22,15 +22,15 @@ export default function SignUp() {
     const onSubmit = (data) =>{ 
         console.log('data" ', data)
         console.log('onSubmitdataerrorSIGNUP: ',errors);
-        setAllParentInfoFormVals({...allParentInfoFormVals, FirstName: data.FirstName, LastName: data.LastName, Email: data.Email, password: data.password, hear_about_us: data.hear_about_us, holder_name: data.holder_name,})
+        setAllParentInfoFormVals({...allParentInfoFormVals, FirstName: data.FirstName, LastName: data.LastName, Email: data.Email, password: data.password, hear_about_us: data.hear_about_us, holder_name: data.holder_name, isError: false})
     };
     useEffect(() => {
-        console.log('on change no errors: ', allParentInfoFormVals)
+        console.log('on change: ', allParentInfoFormVals)
     }, [allParentInfoFormVals])
     const CardHolderName = () => {
         return (
             <input 
-                className={css(errors.holder_name ? styles.InputError : styles.InputContainer)}
+                className={css(errors.holder_name ? styles.InputErrorHolder : styles.InputCardHolder)}
                 name="holder_name"
                 type="text"
                 placeholder={errors.holder_name ? errors.holder_name.message : "Card Holder Name"}
@@ -248,7 +248,7 @@ const styles = StyleSheet.create({
         marginLeft: '5.2em',
         marginRight: 'auto',
     },
-    InputContainer: {
+    InputCardHolder: {
         display: 'flex',
         marginLeft: 'auto',
         marginRight: 'auto',
@@ -257,7 +257,7 @@ const styles = StyleSheet.create({
         width: '50%',
         marginTop: '.5em'
     },
-    InputError: {
+    InputErrorHolder: {
         display: 'flex',
         marginLeft: 'auto',
         marginRight: 'auto',

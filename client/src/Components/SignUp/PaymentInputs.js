@@ -20,7 +20,7 @@ export default function PaymentInputs({CardHolderName}) {
     } = usePaymentInputs();
     const { register, handleSubmit, getValues, formState: { errors } } = useForm();
     useEffect(() => {
-        console.log('forVals: ', wrapperProps)
+        console.log('forValsPaymentNoError?: ', allPaymentFormValues)
     }, [allPaymentFormValues])
     useEffect(() => {
         if (planSelected === 'Monthly') {
@@ -38,8 +38,7 @@ export default function PaymentInputs({CardHolderName}) {
     }, [childCount, planSelected]);
 
     const handleChange = (e) => {
-        
-        setAllPaymentFormValues({...allPaymentFormValues, [e.target.name]: [e.target.value]})
+        setAllPaymentFormValues({...allPaymentFormValues, [e.target.name]: e.target.value, isError: wrapperProps.error ? true : false})
     }
     return (
         <div className={css(styles.MainContainer)}> 
@@ -55,20 +54,6 @@ export default function PaymentInputs({CardHolderName}) {
                     </div>
                 </div>
                 <div >
-                {/* <input 
-                            name="FirstName"
-                            className={css(errors.FirstName ? styles.InputError : styles.InputContainer)}
-                            type="text"
-                            placeholder={errors.FirstName ? errors.FirstName.message : "First name"} 
-                            {...register("FirstName", {required: 'First name required!', maxLength: 80})} 
-                        /> */}
-                    {/* <input 
-                        className={css(errors.holder_name ? styles.InputError : styles.InputContainer)}
-                        name="holder_name"
-                        type="text"
-                        placeholder={errors.holder_name ? errors.holder_name.message : "Card Holder Name"}
-                        {...register("holder_name", {required: 'Name required!'})}
-                    /> */}
                     <CardHolderName />
                     <div style={{display: 'flex', justifyContent: 'center', marginTop: '.5em'}}>
                         <PaymentInputsWrapper {...wrapperProps}>
@@ -77,12 +62,11 @@ export default function PaymentInputs({CardHolderName}) {
                             <input name="expire" {...getExpiryDateProps({ onChange: handleChange})} />
                             <input name="cvc" {...getCVCProps({ onChange: handleChange})} />
                             <input {...getZIPProps({ onChange: handleChange })} />
-
                         </PaymentInputsWrapper>
                     </div>
                     <div style={{display: 'flex', flexDirection: 'column',justifyContent: 'center', }}>
                         <input className={css(styles.SubmitButton)} type="submit" value="Join"/>
-                        <div className={css(styles.TermsText)}>By clicking Join below, you agree to our Terms and Conditoins and Privacy Policy</div>
+                        <div className={css(styles.TermsText)}>By clicking Join, you agree to our Terms and Conditoins and Privacy Policy</div>
                     </div>
                 </div>
             </div>
