@@ -7,8 +7,8 @@ import Globe from '../Common/Images/Globe.png'
 import {SignUpContext} from './Container/SignUpContainer';
 
 export default function PaymentInputs() {
-    const { childCount, planSelected, allPaymentFormValues, setAllPaymentFormValues } = useContext(SignUpContext);
-    const [price, setPrice] = useState(29);
+    const { childCount, planSelected, allPaymentFormValues, setAllPaymentFormValues, price, setPrice } = useContext(SignUpContext);
+    // const [price, setPrice] = useState(29);
     const {
         meta,
         wrapperProps,
@@ -18,7 +18,6 @@ export default function PaymentInputs() {
         getCVCProps,
         getZIPProps
     } = usePaymentInputs();
-    // console.log('meta: ', meta);
 
     useEffect(() => {
         console.log('forVals: ', wrapperProps)

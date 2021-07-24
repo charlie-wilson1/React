@@ -13,44 +13,28 @@ import PaymentInputs from './PaymentInputs';
 
 export default function SignUp() {
     const { register, handleSubmit, getValues, formState: { errors } } = useForm();
-    const [childCount, setChildCount] = useState(1)
     const onSubmit = (data) =>{ 
         console.log('data" ', data)
         console.log('onSubmitdata: ',errors);
-        // try {
-        //     let res = await axios({
-        //         method: 'post',
-        //         url: '/signUpForm',
-        //         data: data,
-        //     })
-        //     console.log('axiosRes', res)
-            
-        // } catch (e) {
-        //     console.log(e)
-        // }
     };
     console.log(errors);
-    const inputClassName = css(
-        errors ? styles.InputContainer : styles.InputError
-
-    )
     return (
         <div className={css(styles.MainContainer)}>
             <ProgressTracker />
-            <form style={{display: 'grid', gridTemplateRows: '33vh 33vh 45vh', gridTemplateColumns:'50% 50%', height: '100%'}} onSubmit={handleSubmit((data) => onSubmit(data))}>
+            <form style={{display: 'grid', gridTemplateRows: '33vh 33vh 45vh', gridTemplateColumns:'50% 50%', height: '100%'}} onSubmit={handleSubmit(onSubmit)}>
                 <div className={css(styles.StaticInfoAndImageContainer)}>
                     <StaticContent1 />
                 </div>
                 <div className={css(styles.ParentInfoFormContainer)}>
                     <div className={css(styles.SideBySideInput)}>
                         <input 
-                            className={css(errors.Email ? styles.InputError : styles.InputContainer)}
+                            className={css(errors.FirstName ? styles.InputError : styles.InputContainer)}
                             type="text"
                             placeholder={errors.FirstName ? errors.FirstName.message : "First name"} 
                             {...register("FirstName", {required: 'First name required!', maxLength: 80})} 
                         />
                         <input 
-                            className={css(errors.Email ? styles.InputError : styles.InputContainer)}
+                            className={css(errors.LastName ? styles.InputError : styles.InputContainer)}
                             type="text" 
                             placeholder={errors.LastName ? errors.LastName.message : "Last name"} 
                             {...register("LastName", {required: 'Last name required!', maxLength: 100})} 
@@ -64,7 +48,7 @@ export default function SignUp() {
                             {...register("Email", {required: "Email is required!", pattern: /^\S+@\S+$/i})} 
                         />
                         <input 
-                            className={css(errors.Email ? styles.InputError : styles.InputContainer)}
+                            className={css(errors.ConfirmEmail ? styles.InputError : styles.InputContainer)}
                             type="text" 
                             placeholder={errors.ConfirmEmail ? errors.ConfirmEmail.message : "Confirm email"} 
                             {...register("ConfirmEmail", {
@@ -81,13 +65,13 @@ export default function SignUp() {
                     </div>
                     <div className={css(styles.SideBySideInput)}>
                         <input 
-                            className={css(errors.Email ? styles.InputError : styles.InputContainer)}
+                            className={css(errors.password ? styles.InputError : styles.InputContainer)}
                             type="text" 
                             placeholder={errors.password ? errors.password.message : "Password"} 
                             {...register("password", { required: "Password is required!" })}
                             />
                         <input
-                            className={css(errors.Email ? styles.InputError : styles.InputContainer)}
+                            className={css(errors.passwordConfirmation ? styles.InputError : styles.InputContainer)}
                             placeholder={errors.passwordConfirmation ? errors.passwordConfirmation.message : "Confirm password"}
                             {...register("passwordConfirmation", {
                                 required: "Please confirm password!",
@@ -154,7 +138,6 @@ const styles = StyleSheet.create({
         gridRow: 1,
         gridColumn: 1,
         display: "flex",
-        // justifyContent: 'center'
         marginLeft: '5em'
     },
     ParentInfoFormContainer: {
@@ -162,10 +145,6 @@ const styles = StyleSheet.create({
         gridColumn: 2,
         display: "flex",
         flexDirection: 'column',
-        // marginTop: 'auto',
-        // marginBottom: 'auto',
-        // marginRight: 'auto',
-        // marginLeft: 'auto'
     },
     SideBySideInput: {
         display: "flex", 
@@ -229,18 +208,12 @@ const styles = StyleSheet.create({
     PlanContainer: {
         gridRow: 2,
         gridColumn: 1,
-        // display: 'flex',
-        // flexDirection: 'column',
         marginLeft: '5em',
-        // marginRight: 'auto',
     },
     ChooseChildrenContainer: {
         gridRow: 2,
         gridColumn: 1,
-        // display: 'flex',
-        // flexDirection: 'column',
         marginLeft: '5em',
-        // marginRight: 'auto',
         marginTop: 'auto',
     },
     HearFromParentsContainer: {
