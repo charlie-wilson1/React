@@ -1,12 +1,16 @@
 import React, { useState, createContext, useEffect } from 'react';
+import { useHistory } from "react-router-dom";
 import axios from 'axios';
 
 import SignUp from '../SignUp';
+import Congrats from '../Congrats';
+import CreateChildAccount from '../CreateChildAccount';
 // import SignUpContext from '../../../Contexts/SignUpContext';
 
 export const SignUpContext = createContext();
 
 export default function SignUpContainer() {
+    const history = useHistory();
 
     const [isFormSubmit, setIsFormSubmit] = useState(false);
     const [childCount, setChildCount] = useState(1);
@@ -28,6 +32,12 @@ export default function SignUpContainer() {
         Email: '',
         password: '',
         hear_about_us: '',
+    });
+    const [stepInProcess, setStepInProcess] = useState({
+        becomeAmember: false,
+        congrats: true,
+        setChildAccount: false,
+
     })
     useEffect(() => {
         if (!allParentInfoFormVals.isError && !allPaymentFormValues.isError) {
@@ -40,6 +50,14 @@ export default function SignUpContainer() {
                 child_count: childCount
             }
             axios.post('parentSignUp', data)
+            .then(response => {
+                console.log('axiosResp', response);
+                setStepInProcess({becomeAmember: false, congrats: true})
+                // history.push('/congrats')
+            })
+            .catch(error => {
+                console.log('axiosError', error)
+            })
         }
     }, [allParentInfoFormVals, allPaymentFormValues])
 
@@ -50,9 +68,12 @@ export default function SignUpContainer() {
             planSelected,setPlanSelected,
             price, setPrice,
             allPaymentFormValues, setAllPaymentFormValues,
-            allParentInfoFormVals, setAllParentInfoFormVals
+            allParentInfoFormVals, setAllParentInfoFormVals, 
+            stepInProcess, setStepInProcess
         }}>
-            <SignUp />
+            {stepInProcess.becomeAmember && <SignUp />}
+            {stepInProcess.congrats && <Congrats />}
+            {stepInProcess.setChildAccount && <CreateChildAccount />}
         </SignUpContext.Provider>
     )
 }

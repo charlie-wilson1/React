@@ -10,6 +10,7 @@ app.use(express.json());
 
 app.post('/parentSignUp', (req, res) => {
     console.log('req: ', req.body)
+    res.status(202).send("SAVED");
 });
 
 app.post('/login', (req, res) => {
