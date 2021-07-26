@@ -5,6 +5,8 @@ import { useForm } from 'react-hook-form';
 import ProgressTracker from '../ProgressTracker';
 import { SignUpContext } from '../Container/SignUpContainer';
 
+import FullExperience from './FullExperience';
+
 const Form = ({index}) => {
 
     console.log('key: ', index)
@@ -15,65 +17,68 @@ const Form = ({index}) => {
         <div className={css(styles.Form)}>
             <div className={css(styles.HeadderText)}>Create Student {index === 0 ? '' : index+1+"'s"} Account</div>
             <form className={css(styles.FormContainer)}>
-                <input 
-                    name="FirstName"
-                    className={css(errors.FirstName ? styles.InputError : styles.InputContainer)}
-                    type="text"
-                    placeholder={errors.FirstName ? errors.FirstName.message : "First name"} 
-                    {...register("FirstName", {required: 'First name required!', maxLength: 80})} 
-                />
-                <input 
-                    name="LastName"
-                    className={css(errors.LastName ? styles.InputError : styles.InputContainer)}
-                    type="text" 
-                    placeholder={errors.LastName ? errors.LastName.message : "Last name"} 
-                    {...register("LastName", {required: 'Last name required!', maxLength: 100})} 
-                />
-                <div className={css(styles.SelectContainer)}>
-                    <label 
-                        className={css(styles.LabelText)}
-                        htmlFor="gender"
-                    >
-                        Gender *not required
-                    </label>
-                    <select 
-                        className={css(styles.SelectDropDown)}
-                        {...register("gender")}>
-                        <option value="male">male</option>
-                        <option value="female">female</option>
-                        <option value="neither">neither</option>
-                    </select>
-                </div> 
-                <div className={css(styles.SelectContainer)}>
-                    <label 
-                        className={css(styles.LabelText)}
-                        htmlFor="birthday"
-                    >
-                        Birthday
-                    </label>
+                <div className={css(styles.ChildFormContainer)}>
                     <input 
-                    className={css(styles.InputContainer)}
-                        type="date" 
-                        placeholder="Birthday" 
-                        name="birthday"
-                        {...register("birthday", {})} />
+                        name="FirstName"
+                        className={css(errors.FirstName ? styles.InputError : styles.InputContainer)}
+                        type="text"
+                        placeholder={errors.FirstName ? errors.FirstName.message : "First name"} 
+                        {...register("FirstName", {required: 'First name required!', maxLength: 80})} 
+                    />
+                    <input 
+                        name="LastName"
+                        className={css(errors.LastName ? styles.InputError : styles.InputContainer)}
+                        type="text" 
+                        placeholder={errors.LastName ? errors.LastName.message : "Last name"} 
+                        {...register("LastName", {required: 'Last name required!', maxLength: 100})} 
+                    />
+                    <div className={css(styles.SelectContainer)}>
+                        <label 
+                            className={css(styles.LabelText)}
+                            htmlFor="gender"
+                        >
+                            Gender *not required
+                        </label>
+                        <select 
+                            className={css(styles.SelectDropDown)}
+                            {...register("gender")}>
+                            <option value="male">male</option>
+                            <option value="female">female</option>
+                            <option value="neither">neither</option>
+                        </select>
+                    </div> 
+                    <div className={css(styles.SelectContainer)}>
+                        <label 
+                            className={css(styles.LabelText)}
+                            htmlFor="birthday"
+                        >
+                            Birthday
+                        </label>
+                        <input 
+                        className={css(styles.InputContainer)}
+                            type="date" 
+                            placeholder="Birthday" 
+                            name="birthday"
+                            {...register("birthday", {})} />
+                    </div>
+                    <div className={css(styles.SelectContainer)}>
+                        <label 
+                            className={css(styles.LabelText)}
+                            htmlFor="grade"
+                        >
+                            Grade
+                        </label>
+                        <select 
+                            className={css(styles.SelectDropDown)}
+                            {...register("grade")}>
+                            <option value="kindergarten">Kindergarten</option>
+                            <option value="first">First</option>
+                            <option value="second">Second</option>
+                            <option value="third">Third</option>s
+                        </select>
+                    </div>
                 </div>
-                <div className={css(styles.SelectContainer)}>
-                    <label 
-                        className={css(styles.LabelText)}
-                        htmlFor="grade"
-                    >
-                        Grade
-                    </label>
-                    <select 
-                        className={css(styles.SelectDropDown)}
-                        {...register("grade")}>
-                        <option value="kindergarten">Kindergarten</option>
-                        <option value="first">First</option>
-                        <option value="second">Second</option>
-                        <option value="third">Third</option>s
-                    </select>
-                </div>
+                <FullExperience />
             </form>
         </div>
     )
@@ -116,7 +121,11 @@ const styles = StyleSheet.create({
         fontSize: '30px',
         fontWeight: 'bold',
     },
-    FormContainer: {
+    Form: {
+        display: 'flex',
+        flexDirection: 'column',
+    },
+    ChildFormContainer: {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
