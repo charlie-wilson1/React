@@ -5,7 +5,6 @@ import axios from 'axios';
 import SignUp from '../SignUp';
 import Congrats from '../Congrats';
 import CreateChildAccount from '../CreateChildAccount/CreateChildAccount';
-// import SignUpContext from '../../../Contexts/SignUpContext';
 
 export const SignUpContext = createContext();
 
@@ -13,7 +12,7 @@ export default function SignUpContainer() {
     const history = useHistory();
 
     const [isFormSubmit, setIsFormSubmit] = useState(false);
-    const [childCount, setChildCount] = useState(3);
+    const [childCount, setChildCount] = useState(1);
     const [planSelected, setPlanSelected] = useState('Monthly');
     const [price, setPrice] = useState(29);
     const [allPaymentFormValues, setAllPaymentFormValues] = useState({
@@ -34,8 +33,8 @@ export default function SignUpContainer() {
         hear_about_us: '',
     });
     const [stepInProcess, setStepInProcess] = useState({
-        becomeAmember: false,
-        congrats: true,
+        becomeAmember: true,
+        congrats: false,
         setChildAccount: false,
 
     })
