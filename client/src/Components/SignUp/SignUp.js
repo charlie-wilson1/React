@@ -40,7 +40,7 @@ export default function SignUp() {
     }
     return (
         <>
-            <ProgressTracker />
+        <ProgressTracker />
         <div className={css(styles.MainContainer)}>
             <form style={{display: 'grid', gridTemplateRows: '33vh 33vh 45vh', gridTemplateColumns:'50% 50%', height: '100%'}} onSubmit={handleSubmit(onSubmit)}>
                 <div className={css(styles.StaticInfoAndImageContainer)}>

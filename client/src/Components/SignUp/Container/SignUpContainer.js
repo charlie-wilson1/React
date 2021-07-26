@@ -4,8 +4,7 @@ import axios from 'axios';
 
 import SignUp from '../SignUp';
 import Congrats from '../Congrats';
-import CreateChildAccount from '../CreateChildAccount';
-// import SignUpContext from '../../../Contexts/SignUpContext';
+import CreateChildAccount from '../CreateChildAccount/CreateChildAccount';
 
 export const SignUpContext = createContext();
 
@@ -34,8 +33,8 @@ export default function SignUpContainer() {
         hear_about_us: '',
     });
     const [stepInProcess, setStepInProcess] = useState({
-        becomeAmember: false,
-        congrats: true,
+        becomeAmember: true,
+        congrats: false,
         setChildAccount: false,
 
     })
