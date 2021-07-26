@@ -23,6 +23,12 @@ export default function FullExperience() {
                         <div className={css(styles.StaticBodyText)}>{bodyText}</div>
                     </div>
                 </div>
+                <div className={css(styles.FormContainer)}>
+                    <input type="text" placeholder="School District " {...register("School District ", {})} />
+                    <input type="text" placeholder="School" {...register("School", {})} />
+                    <input type="text" placeholder="Teachers name" {...register("Teachers name", {})} />
+                    <input type="email" placeholder="Teachers email" {...register("Teachers email", {})} />
+                </div>
             </div>
         </div>
     )
@@ -32,6 +38,8 @@ const styles = StyleSheet.create({
     MainContainer: {
         display: 'flex',
         width: '95%',
+        marginTop: '1em',
+        marginBottom: '1em',
         marginLeft: 'auto',
         marginRight: 'auto',
         flexDirection: 'column',
@@ -47,6 +55,7 @@ const styles = StyleSheet.create({
     StaticAndFormContainer: {
         display: 'flex',
         flexDirection: 'row',
+        marginTop: '.4em'
     },
     StaticContainer: {
         display: 'flex',
@@ -71,7 +80,6 @@ const styles = StyleSheet.create({
     },
     StaticBody: {
         width: '95%',
-        // height: '95%',
         marginTop: '5px',
         marginBottom: '5px',
         marginLeft: 'auto',
