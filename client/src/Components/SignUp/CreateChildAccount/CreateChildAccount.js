@@ -10,11 +10,12 @@ import FullExperience from './FullExperience';
 const Form = ({index, setChildFormNumber, childFormNumber, childCount, setStepInProcess, stepInProcess, childData, setChildData }) => {
 
     const { register, handleSubmit, getValues, formState: { errors } } = useForm();
-    // const [isOkayToEmailTeacher, setIsOkToEmailTeacher] = useState(true);
 
     const onSubmit = (data) => {
         console.log('data: ',data)
         setChildData({...childData, 
+            submitWasClicked: true,
+            childNumber: childFormNumber + 1,
             birthday: data.birthday, 
             firstName: data.firstName, 
             lastName: data.lastName, 
@@ -28,6 +29,7 @@ const Form = ({index, setChildFormNumber, childFormNumber, childCount, setStepIn
         })
         setChildFormNumber(childFormNumber + 1);
         if (childFormNumber === childCount - 1) {
+            setChildData({...childData, isLastChild: true});
             setStepInProcess({...stepInProcess, setChildAccount: false, createStudentProfile: true});
         }
     }
@@ -107,8 +109,12 @@ const Form = ({index, setChildFormNumber, childFormNumber, childCount, setStepIn
 
 export default function CreateChildAccount() {
 
-    const { childCount, setStepInProcess, stepInProcess, childData, setChildData } = useContext(SignUpContext);
+    const { childCount, setStepInProcess, stepInProcess, childData, setChildData, initialStateForAllChildData } = useContext(SignUpContext);
     const [childFormNumber, setChildFormNumber] = useState(0);
+
+    useEffect(() => {
+        console.log('initialStateForAllChildData: ', initialStateForAllChildData)
+    }, [])
 
 
     const children = Array.from(Array(childCount)).map((child, index) => <Form key={index} index={index} setChildFormNumber={setChildFormNumber} childFormNumber={childFormNumber} childCount={childCount} stepInProcess={stepInProcess} setStepInProcess={setStepInProcess} childData={childData} setChildData={setChildData}/>);
