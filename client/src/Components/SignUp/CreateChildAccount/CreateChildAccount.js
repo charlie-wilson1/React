@@ -7,13 +7,27 @@ import { SignUpContext } from '../Container/SignUpContainer';
 
 import FullExperience from './FullExperience';
 
-const Form = ({index, setChildFormNumber, childFormNumber, childCount, setStepInProcess, stepInProcess }) => {
+const Form = ({index, setChildFormNumber, childFormNumber, childCount, setStepInProcess, stepInProcess, childData, setChildData }) => {
 
     const { register, handleSubmit, getValues, formState: { errors } } = useForm();
+    // const [isOkayToEmailTeacher, setIsOkToEmailTeacher] = useState(true);
 
     const onSubmit = (data) => {
+        console.log('data: ',data)
+        setChildData({...childData, 
+            birthday: data.birthday, 
+            firstName: data.firstName, 
+            lastName: data.lastName, 
+            gender: data.gender, 
+            grade: data.grade,
+            school: data.school,
+            schoolDistrict: data.schoolDistrict,
+            teachersEmail: data.teachersEmail,
+            teachersName: data.teachersName,
+            // isOkayToEmailTeacher: isOkayToEmailTeacher,
+        })
         setChildFormNumber(childFormNumber + 1);
-        if (childFormNumber === childCount) {
+        if (childFormNumber === childCount - 1) {
             setStepInProcess({...stepInProcess, setChildAccount: false, createStudentProfile: true});
         }
     }
@@ -29,14 +43,14 @@ const Form = ({index, setChildFormNumber, childFormNumber, childCount, setStepIn
                         className={css(errors.FirstName ? styles.InputError : styles.InputContainer)}
                         type="text"
                         placeholder={errors.FirstName ? errors.FirstName.message : "First name"} 
-                        {...register("FirstName", {required: 'First name required!', maxLength: 80})} 
+                        {...register("firstName", {required: 'First name required!', maxLength: 80})} 
                     />
                     <input 
                         name="LastName"
                         className={css(errors.LastName ? styles.InputError : styles.InputContainer)}
                         type="text" 
                         placeholder={errors.LastName ? errors.LastName.message : "Last name"} 
-                        {...register("LastName", {required: 'Last name required!', maxLength: 100})} 
+                        {...register("lastName", {required: 'Last name required!', maxLength: 100})} 
                     />
                     <div className={css(styles.SelectContainer)}>
                         <label 
@@ -84,8 +98,8 @@ const Form = ({index, setChildFormNumber, childFormNumber, childCount, setStepIn
                         </select>
                     </div>
                 </div>
-                <FullExperience />
-                <input className={css(styles.SubmitButton)} type="submit" value="Join"/>
+            <FullExperience register={register} childData={childData} setChildData={setChildData} />
+                {/* <input className={css(styles.SubmitButton)} type="submit" value="Join"/> */}
             </form>
         </div>
     )
@@ -93,11 +107,11 @@ const Form = ({index, setChildFormNumber, childFormNumber, childCount, setStepIn
 
 export default function CreateChildAccount() {
 
-    const { childCount, setStepInProcess, stepInProcess } = useContext(SignUpContext);
+    const { childCount, setStepInProcess, stepInProcess, childData, setChildData } = useContext(SignUpContext);
     const [childFormNumber, setChildFormNumber] = useState(0);
 
 
-const children = Array.from(Array(childCount)).map((child, index) => <Form key={index} index={index} setChildFormNumber={setChildFormNumber} childFormNumber={childFormNumber} childCount={childCount} stepInProcess={stepInProcess} setStepInProcess={setStepInProcess}/>);
+    const children = Array.from(Array(childCount)).map((child, index) => <Form key={index} index={index} setChildFormNumber={setChildFormNumber} childFormNumber={childFormNumber} childCount={childCount} stepInProcess={stepInProcess} setStepInProcess={setStepInProcess} childData={childData} setChildData={setChildData}/>);
 
     return (
         <>

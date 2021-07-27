@@ -17,16 +17,14 @@ import { SignUpContext } from './Container/SignUpContainer';
 
 
 export default function SignUp() {
+
     const { allParentInfoFormVals, setAllParentInfoFormVals, isFormSubmit, setIsFormSubmit, } = useContext(SignUpContext);
     const { register, handleSubmit, getValues, formState: { errors } } = useForm();
+
     const onSubmit = (data) =>{ 
-        console.log('data" ', data)
-        console.log('onSubmitdataerrorSIGNUP: ',errors);
         setAllParentInfoFormVals({...allParentInfoFormVals, FirstName: data.FirstName, LastName: data.LastName, Email: data.Email, password: data.password, hear_about_us: data.hear_about_us, holder_name: data.holder_name, isError: false})
     };
-    useEffect(() => {
-        console.log('on change: ', allParentInfoFormVals)
-    }, [allParentInfoFormVals])
+
     const CardHolderName = () => {
         return (
             <input 
@@ -38,6 +36,7 @@ export default function SignUp() {
             />
         )
     }
+
     return (
         <>
         <ProgressTracker />
@@ -284,6 +283,5 @@ const styles = StyleSheet.create({
             cursor: 'pointer',
             border: '2px solid',
         }
-
     }
 })

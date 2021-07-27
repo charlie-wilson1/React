@@ -5,6 +5,7 @@ import axios from 'axios';
 import SignUp from '../SignUp';
 import Congrats from '../Congrats';
 import CreateChildAccount from '../CreateChildAccount/CreateChildAccount';
+import StudentCreateProfile from '../StudentCreateProfile/StudentCreateProfile';
 
 export const SignUpContext = createContext();
 
@@ -12,7 +13,7 @@ export default function SignUpContainer() {
     const history = useHistory();
 
     const [isFormSubmit, setIsFormSubmit] = useState(false);
-    const [childCount, setChildCount] = useState(3);
+    const [childCount, setChildCount] = useState(1);
     const [planSelected, setPlanSelected] = useState('Monthly');
     const [price, setPrice] = useState(29);
     const [allPaymentFormValues, setAllPaymentFormValues] = useState({
@@ -37,7 +38,20 @@ export default function SignUpContainer() {
         congrats: false,
         setChildAccount: true,
         createStudentProfile: false
+    });
+    const [childData, setChildData] = useState({
+        firstName: '',
+        lastName: '',
+        birthday: '',
+        gender: '',
+        grade: '',
+        school: '',
+        teachersEmail: '',
+        teachersName: '',
+        schoolDistrict: '',
+        isOkayToEmailTeacher: true,
     })
+    //send all parent info and cc data to back end ad if all goes well render page to enter child data
     useEffect(() => {
         if (!allParentInfoFormVals.isError && !allPaymentFormValues.isError) {
             console.log('NO ERRORS')
@@ -59,6 +73,10 @@ export default function SignUpContainer() {
             })
         }
     }, [allParentInfoFormVals, allPaymentFormValues])
+    //sen
+    useEffect(() => {
+        console.log('childData: ', childData)
+    },[childData])
 
     return (
         <SignUpContext.Provider value={{
@@ -68,12 +86,13 @@ export default function SignUpContainer() {
             price, setPrice,
             allPaymentFormValues, setAllPaymentFormValues,
             allParentInfoFormVals, setAllParentInfoFormVals, 
-            stepInProcess, setStepInProcess
+            stepInProcess, setStepInProcess, 
+            childData, setChildData
         }}>
             {stepInProcess.becomeAmember && <SignUp />}
             {stepInProcess.congrats && <Congrats />}
             {stepInProcess.setChildAccount && <CreateChildAccount />}
-            {/* {stepInProcess.createStudentProfile && } */}
+            {stepInProcess.createStudentProfile && <StudentCreateProfile />}
         </SignUpContext.Provider>
     )
 }
