@@ -12,7 +12,7 @@ const checkBoxText = "I am okay with Learnatric emailing my child’s teacher pe
 
 export default function FullExperience() {
 
-    const [isChecked, setIsChecked] = useState(false);
+    const [isChecked, setIsChecked] = useState(true);
 
     const { register, handleSubmit, getValues, formState: { errors } } = useForm();
 
@@ -60,7 +60,7 @@ export default function FullExperience() {
                             checked={isChecked}
                             icon={<FcCheckmark size={50}/>}
                             name="my-input"
-                            onChange={(e) => setIsChecked(true)}
+                            onChange={(e) => setIsChecked(false)}
                             borderRadius={50}
                             borderColor={'black'}
                             borderWidth={3}

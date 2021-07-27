@@ -12,7 +12,7 @@ export default function SignUpContainer() {
     const history = useHistory();
 
     const [isFormSubmit, setIsFormSubmit] = useState(false);
-    const [childCount, setChildCount] = useState(1);
+    const [childCount, setChildCount] = useState(3);
     const [planSelected, setPlanSelected] = useState('Monthly');
     const [price, setPrice] = useState(29);
     const [allPaymentFormValues, setAllPaymentFormValues] = useState({
@@ -33,10 +33,10 @@ export default function SignUpContainer() {
         hear_about_us: '',
     });
     const [stepInProcess, setStepInProcess] = useState({
-        becomeAmember: true,
+        becomeAmember: false,
         congrats: false,
-        setChildAccount: false,
-
+        setChildAccount: true,
+        createStudentProfile: false
     })
     useEffect(() => {
         if (!allParentInfoFormVals.isError && !allPaymentFormValues.isError) {
@@ -73,6 +73,7 @@ export default function SignUpContainer() {
             {stepInProcess.becomeAmember && <SignUp />}
             {stepInProcess.congrats && <Congrats />}
             {stepInProcess.setChildAccount && <CreateChildAccount />}
+            {/* {stepInProcess.createStudentProfile && } */}
         </SignUpContext.Provider>
     )
 }

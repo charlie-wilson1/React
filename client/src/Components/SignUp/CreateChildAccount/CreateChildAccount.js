@@ -7,16 +7,21 @@ import { SignUpContext } from '../Container/SignUpContainer';
 
 import FullExperience from './FullExperience';
 
-const Form = ({index}) => {
+const Form = ({index, setChildNumber, childNumber}) => {
 
     console.log('key: ', index)
     const { register, handleSubmit, getValues, formState: { errors } } = useForm();
+
+    const onSubmit = (data) => {
+        console.log('onSubmit: ', data)
+        setChildNumber(childNumber + 1);
+    }
 
     
     return (
         <div className={css(styles.Form)}>
             <div className={css(styles.HeadderText)}>Create Student {index === 0 ? '' : index+1+"'s"} Account</div>
-            <form className={css(styles.FormContainer)}>
+            <form className={css(styles.FormContainer)} onSubmit={handleSubmit(onSubmit)}>
                 <div className={css(styles.ChildFormContainer)}>
                     <input 
                         name="FirstName"
@@ -42,9 +47,9 @@ const Form = ({index}) => {
                         <select 
                             className={css(styles.SelectDropDown)}
                             {...register("gender")}>
-                            <option value="male">male</option>
-                            <option value="female">female</option>
-                            <option value="neither">neither</option>
+                            <option value="Male">Male</option> 
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
                         </select>
                     </div> 
                     <div className={css(styles.SelectContainer)}>
@@ -74,11 +79,12 @@ const Form = ({index}) => {
                             <option value="kindergarten">Kindergarten</option>
                             <option value="first">First</option>
                             <option value="second">Second</option>
-                            <option value="third">Third</option>s
+                            <option value="third">Third</option>
                         </select>
                     </div>
                 </div>
                 <FullExperience />
+                <input className={css(styles.SubmitButton)} type="submit" value="Join"/>
             </form>
         </div>
     )
@@ -87,13 +93,16 @@ const Form = ({index}) => {
 export default function CreateChildAccount() {
 
     const { childCount } = useContext(SignUpContext);
-    console.log(childCount);
-    const children = new Array(childCount)
+    const [childNumber, setChildNumber] = useState(0);
+
+
+    const children = Array.from(Array(childCount)).map((child, index) => <Form key={index} index={index} setChildNumber={setChildNumber} childNumber={childNumber} />)
+    console.log(children);
     return (
         <>
             <ProgressTracker />
             <div className={css(styles.MainContainer)}>
-                {Array.from(Array(childCount)).map((child, index) => <Form key={index} index={index} />)}
+                {childNumber <= childCount ? children[childNumber] : ''}
             </div>
         </>
     )
@@ -168,5 +177,22 @@ const styles = StyleSheet.create({
         fontSize: '20px',
         fontFamily: 'Asap, sans-serif',
         alignSelf: 'center',
+    },
+    SubmitButton: {
+        fontSize: '22px',
+        fontWeight: 'bold',
+        color: 'white',
+        marginTop: '5px',
+        width: '498px',
+        alignSelf: 'center',
+        padding: '10px',
+        border: 'none',
+        borderRadius: '10px',
+        backgroundColor: '#4280e3',
+        ':hover': {
+            cursor: 'pointer',
+            outline: '3px solid',
+            
+        },
     },
 })
