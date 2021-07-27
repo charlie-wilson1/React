@@ -11,7 +11,7 @@ export default function Congrats() {
     const { stepInProcess, setStepInProcess } = useContext(SignUpContext);
 
     const handleClick = () => {
-        setStepInProcess({congrats: false, setChildAccount: true})
+        setStepInProcess({...stepInProcess, congrats: false, setChildAccount: true})
     }
     return (
         <div style={{ 

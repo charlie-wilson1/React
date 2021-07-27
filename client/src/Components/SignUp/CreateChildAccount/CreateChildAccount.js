@@ -7,14 +7,15 @@ import { SignUpContext } from '../Container/SignUpContainer';
 
 import FullExperience from './FullExperience';
 
-const Form = ({index, setChildNumber, childNumber}) => {
+const Form = ({index, setChildFormNumber, childFormNumber, childCount, setStepInProcess, stepInProcess }) => {
 
-    console.log('key: ', index)
     const { register, handleSubmit, getValues, formState: { errors } } = useForm();
 
     const onSubmit = (data) => {
-        console.log('onSubmit: ', data)
-        setChildNumber(childNumber + 1);
+        setChildFormNumber(childFormNumber + 1);
+        if (childFormNumber === childCount) {
+            setStepInProcess({...stepInProcess, setChildAccount: false, createStudentProfile: true});
+        }
     }
 
     
@@ -92,17 +93,17 @@ const Form = ({index, setChildNumber, childNumber}) => {
 
 export default function CreateChildAccount() {
 
-    const { childCount } = useContext(SignUpContext);
-    const [childNumber, setChildNumber] = useState(0);
+    const { childCount, setStepInProcess, stepInProcess } = useContext(SignUpContext);
+    const [childFormNumber, setChildFormNumber] = useState(0);
 
 
-    const children = Array.from(Array(childCount)).map((child, index) => <Form key={index} index={index} setChildNumber={setChildNumber} childNumber={childNumber} />)
-    console.log(children);
+const children = Array.from(Array(childCount)).map((child, index) => <Form key={index} index={index} setChildFormNumber={setChildFormNumber} childFormNumber={childFormNumber} childCount={childCount} stepInProcess={stepInProcess} setStepInProcess={setStepInProcess}/>);
+
     return (
         <>
             <ProgressTracker />
             <div className={css(styles.MainContainer)}>
-                {childNumber <= childCount ? children[childNumber] : ''}
+                {childFormNumber <= childCount ? children[childFormNumber] : ''}
             </div>
         </>
     )
@@ -144,14 +145,21 @@ const styles = StyleSheet.create({
     InputContainer: {
         fontSize: '18px',
         height: '35px',
-        // width: '45%',
         marginTop: 'auto',
         borderRadius: '10px',
         boxSizing: 'border-box',
         boxShadow: '0px 4px 4px rgba(0,0,0,0.25)'
     },
     InputError: {
-
+        fontSize: '18px',
+        height: '35px',
+        '::placeholder': {
+            color: 'red',
+        },
+        marginTop: 'auto',
+        borderRadius: '10px',
+        boxSizing: 'border-box',
+        boxShadow: '0px 4px 4px rgba(0,0,0,0.25)'
     },
     SelectContainer: {
         display: "flex", 
@@ -192,7 +200,6 @@ const styles = StyleSheet.create({
         ':hover': {
             cursor: 'pointer',
             outline: '3px solid',
-            
         },
     },
 })
