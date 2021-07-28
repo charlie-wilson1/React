@@ -1,6 +1,8 @@
 const express = require('express');
 const path = require('path');
 
+const { NewAccount } = require('../database/controllers/newAccountQueries.js');
+
 const app = express();
 const PORT = 8080
 
@@ -9,8 +11,12 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 app.use(express.json());
 
 app.post('/parentSignUp', (req, res) => {
-    console.log('req: ', req.body)
-    res.status(202).send("SAVED");
+    const parent = new NewAccount();
+    // console.log('req: ', req.body)
+    parent.addParent(req.body)
+    .then((id) => {
+        res.status(202).send(id);
+    })
 });
 
 app.post('/login', (req, res) => {

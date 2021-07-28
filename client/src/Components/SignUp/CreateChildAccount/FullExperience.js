@@ -10,11 +10,7 @@ const bodyText = 'Our curriculum is based on the US Federal Core Standards and w
 const checkBoxText = "I am okay with Learnatric emailing my child’s teacher periodically about academic progress.";
 
 
-export default function FullExperience() {
-
-    const [isChecked, setIsChecked] = useState(false);
-
-    const { register, handleSubmit, getValues, formState: { errors } } = useForm();
+export default function FullExperience({register, childData, setChildData}) {
 
     return (
         <div className={css(styles.MainContainer)}>
@@ -36,31 +32,31 @@ export default function FullExperience() {
                             className={css(styles.InputContainer)}
                             type="text" 
                             placeholder="School District " 
-                            {...register("School District ", {})} />
+                            {...register("schoolDistrict", {})} />
                         <input 
                             className={css(styles.InputContainer)}
                             type="text" 
                             placeholder="School" 
-                            {...register("School", {})} />
+                            {...register("school", {})} />
                     </div>
                     <div className={css(styles.SideBySideContainer)}>
                         <input 
                             className={css(styles.InputContainer)}
                             type="text" 
                             placeholder="Teachers name" 
-                            {...register("Teachers name", {})} />
+                            {...register("teachersName", {})} />
                         <input 
                             className={css(styles.InputContainer)}
                             type="email" 
                             placeholder="Teachers email" 
-                            {...register("Teachers email", {})} />
+                            {...register("teachersEmail", {})} />
                     </div>
                     <div className={css(styles.CheckboxContainer)}>
                         <Checkbox 
-                            checked={isChecked}
+                            checked={childData.isOkayToEmailTeacher}
                             icon={<FcCheckmark size={50}/>}
                             name="my-input"
-                            onChange={(e) => setIsChecked(true)}
+                            onChange={(e) => setChildData({...childData, isOkayToEmailTeacher: false})}
                             borderRadius={50}
                             borderColor={'black'}
                             borderWidth={3}
@@ -70,6 +66,7 @@ export default function FullExperience() {
                             labelStyle={{ marginLeft: 5, userSelect: "none", fontSize: '18px' }}
                         />
                     </div>
+                    <input className={css(styles.SubmitButton)} type="submit" value="Next"/>
                 </div>
             </div>
         </div>
@@ -165,5 +162,21 @@ const styles = StyleSheet.create({
     CheckBox: {
         cursor: 'pointer',
         backgroundColor: '#faeaa7',
-    }
+    },
+    SubmitButton: {
+        fontSize: '22px',
+        fontWeight: 'bold',
+        color: 'white',
+        marginTop: '5px',
+        width: '498px',
+        alignSelf: 'center',
+        padding: '10px',
+        border: 'none',
+        borderRadius: '10px',
+        backgroundColor: '#4280e3',
+        ':hover': {
+            cursor: 'pointer',
+            outline: '3px solid',
+        },
+    },
 })
