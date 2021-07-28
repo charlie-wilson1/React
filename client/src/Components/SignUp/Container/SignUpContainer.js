@@ -12,7 +12,7 @@ export const SignUpContext = createContext();
 export default function SignUpContainer() {
     const history = useHistory();
 
-    const [isFormSubmit, setIsFormSubmit] = useState(false);
+    // const [isFormSubmit, setIsFormSubmit] = useState(false);
     const [childCount, setChildCount] = useState(1);
     const [planSelected, setPlanSelected] = useState('Monthly');
     const [price, setPrice] = useState(29);
@@ -116,7 +116,7 @@ export default function SignUpContainer() {
 
     return (
         <SignUpContext.Provider value={{
-            isFormSubmit, setIsFormSubmit,
+            // isFormSubmit, setIsFormSubmit,
             childCount,setChildCount,
             planSelected,setPlanSelected,
             price, setPrice,
